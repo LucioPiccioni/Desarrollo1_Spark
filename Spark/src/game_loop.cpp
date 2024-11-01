@@ -103,13 +103,11 @@ void close()
 
 void updatePlayer(Player& auxPlayer)
 {
-    if (IsKeyDown(KEY_UP))
+    movePlayerDown(auxPlayer);
+
+    if (IsKeyPressed(KEY_UP))
     {
         movePlayerUp(auxPlayer);
-    }
-    if (IsKeyDown(KEY_DOWN))
-    {
-        movePlayerDown(auxPlayer);
     }
 }
 
