@@ -1,9 +1,7 @@
 #include "game_loop.h"
-using namespace spark_luchelli;
 
 int main()
 {
-	runGame();
-
+	spark_luchelli::runGame();
 	return 0;
 }
