@@ -84,8 +84,8 @@ void draw()
         drawObstacle(obstacle);
         break;
     case spark_luchelli::GAME_STATES::GAMEOVER:
-        DrawText("Game Over", GetScreenWidth() / 2, GetScreenHeight() / 2, 60, RAYWHITE);
-        DrawText("Press [BACKSPACE] to Restart", GetScreenWidth() / 2, (GetScreenHeight() / 4) * 3, 20, LIGHTGRAY);
+        DrawText("Game Over", (GetScreenWidth() / 2) - (MeasureText("Game Over", 60) / 2), GetScreenHeight() / 2, 60, RAYWHITE);
+        DrawText("Press [BACKSPACE] to Restart", (GetScreenWidth() / 2) - (MeasureText("Press [BACKSPACE] to Restart", 20) / 2), (GetScreenHeight() / 4) * 3, 20, LIGHTGRAY);
         break;
     case spark_luchelli::GAME_STATES::CREDITS:
         break;
