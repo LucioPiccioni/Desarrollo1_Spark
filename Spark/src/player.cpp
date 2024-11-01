@@ -5,7 +5,7 @@ namespace spark_luchelli
 
 void initializePlayer(Player& auxPlayer) 
 {
-    auxPlayer.speed = 1000;
+    auxPlayer.speed = 500;
     auxPlayer.width = 30;
     auxPlayer.height = 30;
     auxPlayer.posX = static_cast<float>(GetScreenWidth() / 8);
