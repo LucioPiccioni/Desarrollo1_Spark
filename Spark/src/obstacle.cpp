@@ -8,10 +8,10 @@ namespace spark_luchelli
 void initializeObstacle(Obstacle& obstacle) 
 {
     obstacle.width = 30;
-    obstacle.height = 100;
+    obstacle.height = 250;
     obstacle.posX = SCREEN_WIDTH;
     obstacle.posY = static_cast<float>(GetRandomValue(0, SCREEN_HEIGHT - obstacle.height));
-    obstacle.speed = 200.0f;
+    obstacle.speed = 450.0f;
     obstacle.isActive = true;
 
 }
