@@ -8,11 +8,11 @@ void runGame();
 
 void initializeGame();
 
-void update();
+void updateGame();
 
-void draw();
+void drawGame();
 
-void close();
+void closeGame();
 
 } //namespace spark_luchelli
 

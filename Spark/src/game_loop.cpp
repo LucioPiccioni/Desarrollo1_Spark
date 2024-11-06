@@ -21,12 +21,12 @@ void runGame()
 
     while (!WindowShouldClose()) 
     {
-        update();
+        updateGame();
 
-        draw();
+        drawGame();
     }
 
-    close();
+    closeGame();
 }
 
 void initializeGame()
@@ -40,7 +40,7 @@ void initializeGame()
     gameState.nextState = GAME_STATES::RUNNING;
 }
 
-void update()
+void updateGame()
 {
     switch (gameState.currentState)
     {
@@ -68,7 +68,7 @@ void update()
     gameState.currentState = gameState.nextState;
 }
 
-void draw()
+void drawGame()
 {
     BeginDrawing();
     ClearBackground(BLACK);
@@ -97,7 +97,7 @@ void draw()
     EndDrawing();
 }
 
-void close()
+void closeGame()
 {
     CloseWindow();
 }
