@@ -23,7 +23,7 @@ void movePlayerUp(Player& auxPlayer)
 {
     if (auxPlayer.posY > 0) 
     {
-        auxPlayer.posY -= static_cast<float>(auxPlayer.speed);
+        auxPlayer.posY -= auxPlayer.speed;
     }
 }
 
