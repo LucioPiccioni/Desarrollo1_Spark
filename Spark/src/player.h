@@ -10,9 +10,10 @@ struct Player
 {
     float posX;
     float posY;
-    int speed;
+    int gravityValue;
     int height;
     int width;
+    int speed;
 };
 
 void initializePlayer(Player& player);

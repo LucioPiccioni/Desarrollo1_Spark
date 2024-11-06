@@ -5,7 +5,8 @@ namespace spark_luchelli
 
 void initializePlayer(Player& auxPlayer) 
 {
-    auxPlayer.speed = 250;
+    auxPlayer.gravityValue = 250;
+    auxPlayer.speed = 100;
     auxPlayer.width = 30;
     auxPlayer.height = 30;
     auxPlayer.posX = static_cast<float>(GetScreenWidth() / 8);
@@ -22,7 +23,7 @@ void movePlayerUp(Player& auxPlayer)
 {
     if (auxPlayer.posY > 0) 
     {
-        auxPlayer.posY += static_cast<float>(-100.0f);
+        auxPlayer.posY -= static_cast<float>(auxPlayer.speed);
     }
 }
 
@@ -30,7 +31,7 @@ void movePlayerDown(Player& auxPlayer)
 {
     if (auxPlayer.posY < GetScreenHeight() - auxPlayer.height)
     {
-        auxPlayer.posY += auxPlayer.speed * GetFrameTime();
+        auxPlayer.posY += auxPlayer.gravityValue * GetFrameTime();
     }
 }
 
