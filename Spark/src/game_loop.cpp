@@ -1,4 +1,5 @@
 #include "game_loop.h"
+#include "state_machine.h"
 #include "game_data.h"
 #include "player.h"
 #include "obstacle.h"
