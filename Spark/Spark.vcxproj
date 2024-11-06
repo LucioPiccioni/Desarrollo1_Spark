@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\game_data.cpp" />
     <ClCompile Include="src\game_loop.cpp" />
@@ -29,6 +30,7 @@
     <ClCompile Include="src\state_machine.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scene_manager.h" />
     <ClInclude Include="src\button.h" />
     <ClInclude Include="src\game_data.h" />
     <ClInclude Include="src\game_loop.h" />

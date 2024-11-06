@@ -6,17 +6,22 @@ namespace spark_luchelli
 
 void initializeMenu()
 {
-	
+	initializeButtons(playButton, creditsButton, exitButton);
 }
 
 void drawMenu()
 {
-
+	drawButton(playButton);
+	drawButton(creditsButton);
+	drawButton(exitButton);
 }
 
 void updateMenu()
 {
-
+	if (isButtonClicked(playButton))
+	{
+		gameState
+	}
 }
 
 void initializeButtons(Button& play, Button& credits, Button& exit)

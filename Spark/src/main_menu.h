@@ -5,9 +5,9 @@
 namespace spark_luchelli
 {
 
-	Button playButton;
-	Button creditsButton;
-	Button exitButton;
+Button playButton;
+Button creditsButton;
+Button exitButton;
 
 void initializeMenu();
 
