@@ -27,6 +27,7 @@
     <ClCompile Include="src\obstacle.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_manager.cpp" />
+    <ClCompile Include="src\sprites.cpp" />
     <ClCompile Include="src\state_machine.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -37,6 +38,7 @@
     <ClInclude Include="src\obstacle.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_manager.h" />
+    <ClInclude Include="src\sprites.h" />
     <ClInclude Include="src\state_machine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">

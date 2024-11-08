@@ -32,14 +32,9 @@ void updateGame(GameStateMachine& gameState)
 
 void drawGame()
 {
-    BeginDrawing();
-    ClearBackground(BLACK);
-
     DrawText("Spark v0.1", 10, 10, 20, LIGHTGRAY);
     drawPlayer(player);
     drawObstacle(obstacle);
-
-    EndDrawing();
 }
 
 void closeGame()

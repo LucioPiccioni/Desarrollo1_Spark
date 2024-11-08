@@ -70,6 +70,9 @@ static void update()
 
 static void draw()
 {
+	BeginDrawing();
+	ClearBackground(BLACK);
+
 	switch (gameState.currentState)
 	{
 	case spark_luchelli::GAME_STATES::MENU:
@@ -87,6 +90,8 @@ static void draw()
 	default:
 		break;
 	}
+
+	EndDrawing();
 }
 
 static void close()
