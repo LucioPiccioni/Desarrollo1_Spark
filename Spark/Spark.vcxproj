@@ -19,24 +19,24 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="scene_manager.cpp" />
     <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\game_data.cpp" />
-    <ClCompile Include="src\game_loop.cpp" />
+    <ClCompile Include="src\gameplay.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_menu.cpp" />
     <ClCompile Include="src\obstacle.cpp" />
     <ClCompile Include="src\player.cpp" />
+    <ClCompile Include="src\scene_manager.cpp" />
     <ClCompile Include="src\state_machine.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scene_manager.h" />
     <ClInclude Include="src\button.h" />
     <ClInclude Include="src\game_data.h" />
-    <ClInclude Include="src\game_loop.h" />
+    <ClInclude Include="src\gameplay.h" />
     <ClInclude Include="src\main_menu.h" />
     <ClInclude Include="src\obstacle.h" />
     <ClInclude Include="src\player.h" />
+    <ClInclude Include="src\scene_manager.h" />
     <ClInclude Include="src\state_machine.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
@@ -106,7 +106,7 @@
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>$(SolutionDir)lib\raylib-5.0_win32_msvc16\include;$(SolutionDir)src</AdditionalIncludeDirectories>
-      <TreatWarningAsError>true</TreatWarningAsError>
+      <TreatWarningAsError>false</TreatWarningAsError>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>

@@ -1,7 +1,7 @@
-#include "game_loop.h"
+#include "scene_manager.h"
 
 int main()
 {
-	spark_luchelli::runGame();
+	spark_luchelli::runProgram();
 	return 0;
 }

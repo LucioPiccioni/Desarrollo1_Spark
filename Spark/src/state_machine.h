@@ -1,11 +1,10 @@
-
 #ifndef  STATE_MACHINE_H
 #define STATE_MACHINE_H
 
 namespace spark_luchelli
 {
 
-enum class GAME_STATES { NOT_STARTED, PAUSED, RUNNING, GAMEOVER, CREDITS };
+enum class GAME_STATES { MENU, PAUSED, RUNNING, GAMEOVER, CREDITS };
 
 struct GameStateMachine
 {
@@ -14,6 +13,7 @@ struct GameStateMachine
 };
 
 } //namespace spark_luchelli
+
 #endif // STATE_MACHINE_H
 
 
