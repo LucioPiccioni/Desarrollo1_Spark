@@ -1,18 +1,21 @@
 #include "obstacle.h"
 #include "game_data.h"
+
 #include "raylib.h"
 
 namespace spark_luchelli 
 {
 
-void initializeObstacle(Obstacle& obstacle) 
+void initializeObstacle(Obstacle& obs) 
 {
-    obstacle.width = 30;
-    obstacle.height = 250;
-    obstacle.posX = SCREEN_WIDTH;
-    obstacle.posY = static_cast<float>(GetRandomValue(0, SCREEN_HEIGHT - obstacle.height));
-    obstacle.speed = 450.0f;
-    obstacle.isActive = true;
+    obs.width = 30;
+    obs.height = 250;
+    obs.pos1.x = SCREEN_WIDTH;
+    obs.pos1.y = static_cast<float>(GetRandomValue(0, (SCREEN_HEIGHT / 2) - obs.height));
+    obs.pos1.x = SCREEN_WIDTH;
+    obs.pos1.y = static_cast<float>(GetRandomValue((SCREEN_HEIGHT / 2), SCREEN_HEIGHT - obs.height));
+    obs.speed = 450.0f;
+    obs.isActive = true;
 
 }
 
@@ -20,25 +23,25 @@ void updateObstacle(Obstacle& obstacle)
 {
     if (obstacle.isActive)
     {
-        obstacle.posX -= obstacle.speed * GetFrameTime();
+        obstacle.pos1.x -= obstacle.speed * GetFrameTime();
 
         // If out of the screen, relocate
-        if (obstacle.posX + obstacle.width < 0)
+        if (obstacle.pos1.x + obstacle.width < 0)
         {
             relocateObstacle(obstacle);
         }
     }
 }
 
-void drawObstacle(Obstacle obstacle) 
+void drawObstacle(Obstacle obstacle)
 {
-    DrawRectangle(static_cast<int>(obstacle.posX), static_cast<int>(obstacle.posY), static_cast<int>(obstacle.width), static_cast<int>(obstacle.height), RED);
+    DrawRectangle(static_cast<int>(obstacle.pos1.x), static_cast<int>(obstacle.pos1.y), static_cast<int>(obstacle.width), static_cast<int>(obstacle.height), RED);
 }
 
 void relocateObstacle(Obstacle& obstacle)
 {
-    obstacle.posX = SCREEN_WIDTH;
-    obstacle.posY = static_cast<float>(GetRandomValue(0, SCREEN_HEIGHT - obstacle.height));
+    obstacle.pos1.x = SCREEN_WIDTH;
+    obstacle.pos1.y = static_cast<float>(GetRandomValue(0, SCREEN_HEIGHT - obstacle.height));
     obstacle.isActive = true;
 }
 
