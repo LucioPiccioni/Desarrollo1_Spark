@@ -1,30 +1,35 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#pragma once
 
-namespace spark_luchelli
+namespace Player
 {
 
-struct Player 
-{
-    float posX;
-    float posY;
-    int gravityValue;
-    int height;
-    int width;
-    int speed;
-};
+	struct Player
+	{
+		Vector2 pos;
 
-void initializePlayer(Player& player);
+		Rectangle frameRec;
 
-void resetPlayer(Player& player);
+		int currentFrame = 0;
+		float framesCounter = 0;
 
-void movePlayerUp(Player& player);
+		float jumpForce;
+		float gravityValue;
 
-void movePlayerDown(Player& player);
+		float size;
+		float radius;
+		float speed;
 
-void drawPlayer(Player& player);
+		bool animate = false;
+		bool collide = false;
+	};
 
+	void initializePlayer(Player& player);
 
-} // namespace spark_luchelli
+	void resetPlayer(Player& player);
 
-#endif // PLAYER_H
+	void movePlayerUp(Player& player);
+
+	void movePlayerDown(Player& player, float deltaTime);
+
+	void drawPlayer(Player& player, Texture2D& playerSheet);
+}

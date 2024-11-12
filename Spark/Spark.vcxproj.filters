@@ -13,6 +13,9 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\GamePlay">
+      <UniqueIdentifier>{8ab76714-41b0-4f1e-80b3-11f67aa79581}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\state_machine.cpp">
@@ -50,9 +53,6 @@
     <ClInclude Include="src\game_data.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\gameplay.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
     <ClInclude Include="src\player.h">
       <Filter>Header Files</Filter>
     </ClInclude>
@@ -73,6 +73,9 @@
     </ClInclude>
     <ClInclude Include="src\sprites.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameplay.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

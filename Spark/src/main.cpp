@@ -2,6 +2,6 @@
 
 int main()
 {
-	spark_luchelli::runProgram();
+	Obstacle::runProgram();
 	return 0;
 }

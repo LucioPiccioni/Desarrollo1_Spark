@@ -1,29 +1,37 @@
-#ifndef OBSTACLE_H
-#define OBSTACLE_H
+#pragma once
 
 #include "raylib.h"
 
-namespace spark_luchelli 
+namespace Obstacle
 {
 
-    struct Obstacle 
-    {
-        Vector2 pos1;
-        Vector2 pos2;
-        float speed;
-        int width;
-        int height;
-        bool isActive;
-    };
+	struct Pipe
+	{
+		Rectangle rect = {};
+		float angle = 0;
+	};
 
-    void initializeObstacle(Obstacle& obstacle);
+	struct Obstacle
+	{
+		bool counted = false;
 
-    void updateObstacle(Obstacle& obstacle);
+		Pipe top = {};
+		Pipe bottom = {};
 
-    void drawObstacle(Obstacle obstacle);
+		const float speed = 150;
 
-    void relocateObstacle(Obstacle& obstacle);
+	};
 
-} // namespace spark_luchelli
+	const float maxSpacing = 384;
+	float actualSpacing;
+	const float minSpacing = 70;
 
-#endif // OBSTACLE_H
+	Obstacle Creator();
+
+	void updateObstacle(Obstacle& obstacle);
+
+	void drawObstacle(Obstacle obstacle);
+
+	void relocateObstacle(std::list<Obstacle>& obstacle);
+
+}

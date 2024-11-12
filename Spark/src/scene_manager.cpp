@@ -5,98 +5,98 @@
 #include "raylib.h"
 
 
-namespace spark_luchelli
+namespace SCENE_MANAGER
 {
 
-GameStateMachine gameState;
-	
-static void initialize();
+	GAME_STATES::GAME_STATES gameState;
 
-static void update();
+	static void initialize();
 
-static void draw();
+	static void update();
 
-static void close();
+	static void draw();
 
-
-void runProgram()
-{
-	initialize();
-
-	while (!WindowShouldClose())
-	{ 
-		update();
-
-		draw();
-	}
-
-	close();
-}
-
-static void initialize()
-{
-	InitWindow(800, 600, "BOKITA");
-
-	initializeMenu(gameState);
-	initializeGame(gameState);
-
-	gameState.currentState = GAME_STATES::RUNNING;
-	gameState.nextState = GAME_STATES::RUNNING;
-}
+	static void close();
 
 
-static void update()
-{
-	switch (gameState.currentState)
+	void runProgram()
 	{
-	case spark_luchelli::GAME_STATES::MENU:
-		updateMenu(gameState);
-		break;
-	case spark_luchelli::GAME_STATES::PAUSED:
-		break;
-	case spark_luchelli::GAME_STATES::RUNNING:
-		updateGame(gameState);
-		break;
-	case spark_luchelli::GAME_STATES::GAMEOVER:
-		break;
-	case spark_luchelli::GAME_STATES::CREDITS:
-		break;
-	default:
-		break;
+		initialize();
+
+		while (!WindowShouldClose())
+		{
+			update();
+
+			draw();
+		}
+
+		close();
 	}
 
-	gameState.currentState = gameState.nextState;
-}
-
-static void draw()
-{
-	BeginDrawing();
-	ClearBackground(BLACK);
-
-	switch (gameState.currentState)
+	static void initialize()
 	{
-	case spark_luchelli::GAME_STATES::MENU:
-		drawMenu();
-		break;
-	case spark_luchelli::GAME_STATES::PAUSED:
-		break;
-	case spark_luchelli::GAME_STATES::RUNNING:
-		drawGame();
-		break;
-	case spark_luchelli::GAME_STATES::GAMEOVER:
-		break;
-	case spark_luchelli::GAME_STATES::CREDITS:
-		break;
-	default:
-		break;
+		InitWindow(800, 600, "BOKITA");
+
+		MAIN_MENU::initializeMenu(gameState);
+		GamePlay::initializeGame(gameState);
+
+		gameState.currentState = GAME_STATES::GAME_STATES::RUNNING;
+		gameState.nextState = GAME_STATES::GAME_STATES::RUNNING;
 	}
 
-	EndDrawing();
-}
 
-static void close()
-{
-	CloseWindow();
-}
+	static void update()
+	{
+		switch (gameState.currentState)
+		{
+		case GAME_STATES::GAME_STATES::MENU:
+			MAIN_MENU::updateMenu(gameState);
+			break;
+		case GAME_STATES::GAME_STATES::PAUSED:
+			break;
+		case GAME_STATES::GAME_STATES::RUNNING:
+			GamePlay::updateGame(gameState);
+			break;
+		case GAME_STATES::GAME_STATES::GAMEOVER:
+			break;
+		case GAME_STATES::GAME_STATES::CREDITS:
+			break;
+		default:
+			break;
+		}
+
+		gameState.currentState = gameState.nextState;
+	}
+
+	static void draw()
+	{
+		BeginDrawing();
+		ClearBackground(BLACK);
+
+		switch (gameState.currentState)
+		{
+		case Obstacle::GAME_STATES::MENU:
+			drawMenu();
+			break;
+		case Obstacle::GAME_STATES::PAUSED:
+			break;
+		case Obstacle::GAME_STATES::RUNNING:
+			drawGame();
+			break;
+		case Obstacle::GAME_STATES::GAMEOVER:
+			break;
+		case Obstacle::GAME_STATES::CREDITS:
+			break;
+		default:
+			break;
+		}
+
+		EndDrawing();
+	}
+
+	static void close()
+	{
+		CloseWindow();
+	}
 
 } // namespace spark_luchelli

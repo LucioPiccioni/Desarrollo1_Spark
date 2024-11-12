@@ -1,19 +1,16 @@
-#ifndef GAMEPLAY_H
-#define GAMEPLAY_H
+#pragma once
 
 #include "state_machine.h"
 
-namespace spark_luchelli
+namespace GamePlay
 {
 
-void initializeGame(GameStateMachine& gameState);
+	void initializeGame(GAME_STATES::GAME_STATES& gameState);
 
-void updateGame(GameStateMachine& gameState);
+	void updateGame(GAME_STATES::GAME_STATES& gameState);
 
-void drawGame();
+	void drawGame();
 
-void closeGame();
+	void closeGame();
 
-} //namespace spark_luchelli
-
-#endif //GAMEPLAY_H
+} 

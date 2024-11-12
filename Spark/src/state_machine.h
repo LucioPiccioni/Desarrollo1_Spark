@@ -1,19 +1,24 @@
-#ifndef  STATE_MACHINE_H
-#define STATE_MACHINE_H
+#pragma once
 
-namespace spark_luchelli
+namespace GAME_STATES
 {
+	enum class GAME_STATES
+	{
+		NONE,
+		MAIN_MENU,
+		PLAYING,
+		RULES,
+		CREDIS,
+		WANT_TO_EXIT,
 
-enum class GAME_STATES { MENU, PAUSED, RUNNING, GAMEOVER, CREDITS };
+		REPLAY,
 
-struct GameStateMachine
-{
-	GAME_STATES currentState;
-	GAME_STATES nextState;
-};
+		RESUME,
 
-} //namespace spark_luchelli
-
-#endif // STATE_MACHINE_H
+		CONFIRM_EXIT,
+		CANCEL_EXIT,
+		EXIT
+	};
+}
 
 

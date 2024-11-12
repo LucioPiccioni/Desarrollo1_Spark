@@ -1,44 +1,46 @@
 #include "player.h"
 #include "raylib.h"
 
-namespace spark_luchelli
+namespace Player
 {
 
-void initializePlayer(Player& auxPlayer) 
-{
-    auxPlayer.gravityValue = 250;
-    auxPlayer.speed = 100;
-    auxPlayer.width = 30;
-    auxPlayer.height = 30;
-    auxPlayer.posX = static_cast<float>(GetScreenWidth() / 8);
-    auxPlayer.posY = static_cast<float>(GetScreenHeight() / 2 - auxPlayer.height / 2);
+	void initializePlayer(Player& auxPlayer)
+	{
+		auxPlayer.gravityValue = 250;
+		auxPlayer.speed = 0;
+		auxPlayer.size = 30;
+		auxPlayer.pos = { screenWidth / 5, screenHeight / 2 };
+	}
+
+	void resetPlayer(Player& auxPlayer)
+	{
+		auxPlayer.pos = { screenWidth / 5, screenHeight / 2 };
+	}
+
+	void movePlayerUp(Player& auxPlayer)
+	{
+		if (IsKeyPressed(KEY_SPACE))
+		{
+			auxPlayer.speed = auxPlayer.jumpForce;
+			auxPlayer.animate = true;
+		}
+	}
+
+	void movePlayerDown(Player& auxPlayer, float deltaTime)
+	{
+		auxPlayer.speed += auxPlayer.gravityValue * deltaTime;
+		auxPlayer.pos.y += auxPlayer.speed * deltaTime;
+	}
+
+	void drawPlayer(Player& auxPlayer, Texture2D& playerSheet)
+	{
+		DrawTexturePro(
+			playerSheet,
+			auxPlayer.frameRec,
+			Rectangle{ auxPlayer.pos.x - auxPlayer.size / 2, auxPlayer.pos.y - auxPlayer.size / 2, auxPlayer.size, auxPlayer.size },
+			Vector2{ static_cast<float>(playerSheet.width) / 2, static_cast<float>(playerSheet.height) / 2 },
+			0,
+			WHITE);
+	}
+
 }
-
-void resetPlayer(Player& auxPlayer) 
-{
-    auxPlayer.posX = 50;
-    auxPlayer.posY = static_cast<float>(GetScreenHeight() / 2 - auxPlayer.height / 2);
-}
-
-void movePlayerUp(Player& auxPlayer) 
-{
-    if (auxPlayer.posY > 0) 
-    {
-        auxPlayer.posY -= auxPlayer.speed;
-    }
-}
-
-void movePlayerDown(Player& auxPlayer) 
-{
-    if (auxPlayer.posY < GetScreenHeight() - auxPlayer.height)
-    {
-        auxPlayer.posY += auxPlayer.gravityValue * GetFrameTime();
-    }
-}
-
-void drawPlayer(Player& auxPlayer) 
-{
-    DrawRectangle(static_cast<int>(auxPlayer.posX), static_cast<int>(auxPlayer.posY), auxPlayer.width, auxPlayer.height, BLUE);
-}
-
-} // namespace spark_luchelli

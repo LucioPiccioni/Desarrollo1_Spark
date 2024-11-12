@@ -1,17 +1,14 @@
-#ifndef SCENE_MANAGER_H
-#define SCENE_MANAGER_H
+#pragma once
 
 #include "state_machine.h"
 
-namespace spark_luchelli
+namespace SCENE_MANAGER
 {
-	extern GameStateMachine gameState;
+	extern GAME_STATES::GAME_STATES gameState;
 	
 	void runProgram();
 
-} // namespace spark_luchelli
-
-#endif // SCENE_MANAGER_H
+}
 
 
 

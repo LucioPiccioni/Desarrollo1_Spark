@@ -1,19 +1,17 @@
-#ifndef MAIN_MENU_H
-#define MAIN_MENU_H
+#pragma once
 
 #include "state_machine.h"
 
-
-namespace spark_luchelli
+namespace MAIN_MENU
 {
 
-void initializeMenu(GameStateMachine& gameState);
+	void initializeMenu(GAME_STATES::GAME_STATES& gameState);
 
-void updateMenu(GameStateMachine& gameState);
+	void updateMenu(GAME_STATES::GAME_STATES& gameState);
 
-void drawMenu();
+	static void initializeButtons();
 
+	void drawMenu();
 
-} // spark_luchelli
+}
 
-#endif // MAIN_MENU_H

@@ -1,27 +1,45 @@
 #include "button.h"
 
+#include <string>
 
-namespace spark_luchelli
+namespace BUTTON
 {
+	Button createButton(Vector2 position, Vector2 size, const char* text)
+	{
+		Button button;
+		button.rect = { position.x, position.y, size.x, size.y };
+		button.text = text;
+		button.color = LIGHTGRAY;
+		return button;
+	}
 
-    Button createButton(Vector2 position, Vector2 size, const char* text)
-    {
-        Button button;
-        button.rect = { position.x, position.y, size.x, size.y };
-        button.text = text;
-        button.color = LIGHTGRAY;
-        return button;
-    }
+	void drawButton(Button button, Font font)
+	{
+		DrawRectangleRec(button.rect, button.color);
+		DrawRectangleLinesEx(button.rect, 2, button.outline);
 
-    void drawButton(Button& button)
-    {
-        DrawRectangleRec(button.rect, button.color);
-        DrawText(button.text, static_cast<int>(button.rect.x) + 10, static_cast<int>(button.rect.y) + 10, 20, BLACK);
-    }
+		Vector2 textSize = MeasureTextEx(font, button.text.c_str(), textFontSize, 1);
 
-    bool isButtonClicked(Button& button)
-    {
-        return CheckCollisionPointRec(GetMousePosition(), button.rect) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
-    }
+		Vector2 textPosition = {
+			button.rect.x + (button.rect.width - textSize.x) / 2,
+			button.rect.y + (button.rect.height - textSize.y) / 2
+		};
 
+		DrawTextPro(font,
+			button.text.c_str(),
+			textPosition,
+			Vector2{ 0,0 },
+			0,
+			textFontSize,
+			0,
+			BLACK);
+	}
+
+	bool isButtonClicked(Vector2 mouse, Button button)
+	{
+		return (mouse.x >= button.rect.x &&
+			mouse.x <= button.rect.x + button.rect.width &&
+			mouse.y >= button.rect.y &&
+			mouse.y <= button.rect.y + button.rect.height) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+	}
 }
