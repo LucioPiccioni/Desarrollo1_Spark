@@ -1,4 +1,4 @@
-#include "gameplay.h"
+#include "gameplay2p.h"
 
 #include <List>
 
@@ -11,9 +11,11 @@
 #include "game_data.h"
 #include "sprites.h"
 
-namespace GAMEPLAY1P
+namespace GAMEPLAY2P
 {
-	PLAYER::Player player;
+	const int maxPlayers = 2;
+
+	PLAYER::Player player[maxPlayers];
 
 	Sprites::SpriteMovement spriteMovement = {};
 
@@ -23,7 +25,11 @@ namespace GAMEPLAY1P
 
 	void initializeGame()
 	{
-		initializePlayer(player, Sprites::sprites.playerSheet);
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			initializePlayer(player[i], Sprites::sprites.playerSheet);
+		}
+
 		resetObstacles();
 	}
 
@@ -59,21 +65,27 @@ namespace GAMEPLAY1P
 			Obstacle::updateObstacle(*it, deltaTime);
 		}
 
-		if (AddPoint())
-			player.points++;
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			if (AddPoint(player[i].pos))
+				player[i].points++;
+		}
 
-		if (DidPlayerDied())
-			gameState = GAME_STATES::GAME_STATES::GAME_OVER;
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			if (DidPlayerDied(player[i].pos, player[i].radius))
+				gameState = GAME_STATES::GAME_STATES::GAME_OVER;
+		}
 	}
 
 	void drawGame()
 	{
-		std::string text = "Points: " + std::to_string(player.points) + ".";
-
-
 		drawBackgroundAssets();
 
-		drawPlayer(player, Sprites::sprites.playerSheet);
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			drawPlayer(player[i], Sprites::sprites.playerSheet);
+		}
 
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
@@ -82,7 +94,10 @@ namespace GAMEPLAY1P
 
 		drawFrontAssets();
 
-		DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
+	
+			std::string text = "Points: " + std::to_string(player[0].points) + ".";
+			DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
+		
 	}
 
 	void drawBackgroundAssets()
@@ -136,14 +151,26 @@ namespace GAMEPLAY1P
 
 	void updatePlayer(float deltaTime)
 	{
-		movePlayerDown(player, deltaTime);
 
-		if (IsKeyPressed(KEY_SPACE))
+		if (IsKeyPressed(KEY_W))
 		{
-			movePlayerUp(player);
+			movePlayerUp(player[0]);
 		}
 
-		PLAYER::Anitmation(player, Sprites::sprites.playerSheet, deltaTime);
+		if (IsKeyPressed(KEY_UP))
+		{
+			movePlayerUp(player[1]);
+		}
+
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			movePlayerDown(player[i], deltaTime);
+		}
+
+		for (int i = 0; i < maxPlayers; i++)
+		{
+			PLAYER::Anitmation(player[i], Sprites::sprites.playerSheet, deltaTime);
+		}
 	}
 
 	void updateTexturesPos(float deltaTime)
@@ -166,11 +193,11 @@ namespace GAMEPLAY1P
 			spriteMovement.fence = 0;
 	}
 
-	bool AddPoint()
+	bool AddPoint(Vector2 pos)
 	{
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
-			if (!it->counted && player.pos.x > it->top.rect.x)
+			if (!it->counted && pos.x > it->top.rect.x)
 			{
 				it->counted = true;
 				return true;
@@ -180,33 +207,33 @@ namespace GAMEPLAY1P
 		return false;
 	}
 
-	bool DidPlayerDied()
+	bool DidPlayerDied(Vector2 pos, float radius)
 	{
-		if (player.pos.y + player.radius > SCREEN_HEIGHT)
+		if (pos.y + radius > SCREEN_HEIGHT)
 			return true;
 
 
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
-			float closestX = std::max(it->top.rect.x, std::min(player.pos.x, it->top.rect.x + it->top.rect.width));
-			float closestY = std::max(it->top.rect.y, std::min(player.pos.y, it->top.rect.y + it->top.rect.height));
+			float closestX = std::max(it->top.rect.x, std::min(pos.x, it->top.rect.x + it->top.rect.width));
+			float closestY = std::max(it->top.rect.y, std::min(pos.y, it->top.rect.y + it->top.rect.height));
 
-			float distanceX = player.pos.x - closestX;
-			float distanceY = player.pos.y - closestY;
+			float distanceX = pos.x - closestX;
+			float distanceY = pos.y - closestY;
 
-			if ((distanceX * distanceX + distanceY * distanceY) <= (player.radius * player.radius) || 
-				player.pos.y - player.radius < it->top.rect.y && player.pos.x + player.radius > it->top.rect.x && player.pos.x - player.radius < it->top.rect.x + it->top.rect.width)
+			if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius) ||
+				pos.y - radius < it->top.rect.y && pos.x + radius > it->top.rect.x && pos.x - radius < it->top.rect.x + it->top.rect.width)
 			{
 				return true;
 			}
 
-			closestX = std::max(it->bottom.rect.x, std::min(player.pos.x, it->bottom.rect.x + it->bottom.rect.width));
-			closestY = std::max(it->bottom.rect.y, std::min(player.pos.y, it->bottom.rect.y + it->bottom.rect.height));
+			closestX = std::max(it->bottom.rect.x, std::min(pos.x, it->bottom.rect.x + it->bottom.rect.width));
+			closestY = std::max(it->bottom.rect.y, std::min(pos.y, it->bottom.rect.y + it->bottom.rect.height));
 
-			distanceX = player.pos.x - closestX;
-			distanceY = player.pos.y - closestY;
+			distanceX = pos.x - closestX;
+			distanceY = pos.y - closestY;
 
-			if ((distanceX * distanceX + distanceY * distanceY) <= (player.radius * player.radius))
+			if ((distanceX * distanceX + distanceY * distanceY) <= (radius * radius))
 			{
 				return true;
 			}

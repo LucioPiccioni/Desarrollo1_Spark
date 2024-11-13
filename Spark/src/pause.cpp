@@ -16,7 +16,7 @@ namespace PAUSE
 		float startY = SCREEN_HEIGHT - (BUTTON::buttonHeight * buttonCount + BUTTON::buttonSpacing * (buttonCount - 1));
 
 
-		buttons[0].option = GAME_STATES::GAME_STATES::PLAYING;
+		buttons[0].option = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
 		buttons[1].option = GAME_STATES::GAME_STATES::MAIN_MENU;
 		buttons[2].option = GAME_STATES::GAME_STATES::WANT_TO_EXIT;
 
@@ -57,7 +57,7 @@ namespace PAUSE
 		}
 
 		if (gameState == GAME_STATES::GAME_STATES::MAIN_MENU)
-			GAMEPLAY::initializeGame();
+			GAMEPLAY1P::initializeGame();
 	}
 
 	void draw(Font font)

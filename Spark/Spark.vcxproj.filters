@@ -63,6 +63,9 @@
     <ClCompile Include="src\pause.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\gameplay2p.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gameplay.h">
@@ -97,6 +100,9 @@
     </ClInclude>
     <ClInclude Include="src\pause.h">
       <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\gameplay2p.h">
+      <Filter>Header Files\GamePlay</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

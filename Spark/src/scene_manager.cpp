@@ -5,6 +5,7 @@
 #include "state_machine.h"
 
 #include "gameplay.h"
+#include "gameplay2p.h"
 
 #include "pause.h"
 
@@ -17,7 +18,7 @@
 namespace SCENE_MANAGER
 {
 	GAME_STATES::GAME_STATES gameState = GAME_STATES::GAME_STATES::MAIN_MENU;
-
+	GAME_STATES::GAME_STATES previusGameMode = GAME_STATES::GAME_STATES::NONE;
 
 	void runProgram()
 	{
@@ -37,8 +38,9 @@ namespace SCENE_MANAGER
 	{
 		InitWindow(800, 600, "Flappy Bird");
 
-		Sprites::initSprites(GAMEPLAY::sprites);
-		GAMEPLAY::initializeGame();
+		Sprites::initSprites();
+		GAMEPLAY1P::initializeGame();
+		GAMEPLAY2P::initializeGame();
 		MAIN_MENU::initializeMenu();
 		PAUSE::initButtons();
 		GAME_OVER::initButtons();
@@ -54,9 +56,14 @@ namespace SCENE_MANAGER
 			MAIN_MENU::updateMenu(gameState);
 			break;
 
-		case GAME_STATES::GAME_STATES::PLAYING:
-			GAMEPLAY::updateGame(gameState);
+		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
+			previusGameMode = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
+			GAMEPLAY1P::updateGame(gameState);
 			break;
+
+		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
+			previusGameMode = GAME_STATES::GAME_STATES::TWO_PLAYER_MODE;
+			GAMEPLAY2P::updateGame(gameState);
 
 		case GAME_STATES::GAME_STATES::PAUSE:
 			PAUSE::update(gameState);
@@ -92,8 +99,12 @@ namespace SCENE_MANAGER
 			MAIN_MENU::drawMenu();
 			break;
 
-		case GAME_STATES::GAME_STATES::PLAYING:
-			GAMEPLAY::drawGame();
+		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
+			GAMEPLAY1P::drawGame();
+			break;
+
+		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
+			GAMEPLAY2P::drawGame();
 			break;
 
 		case GAME_STATES::GAME_STATES::PAUSE:
@@ -123,7 +134,7 @@ namespace SCENE_MANAGER
 
 	void close()
 	{
-		GAMEPLAY::unInitGame();
+		GAMEPLAY1P::unInitGame();
 		CloseWindow();
 	}
 

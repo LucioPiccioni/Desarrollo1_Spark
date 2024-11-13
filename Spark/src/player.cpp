@@ -29,11 +29,8 @@ namespace PLAYER
 
 	void movePlayerUp(Player& player)
 	{
-		if (IsKeyPressed(KEY_SPACE))
-		{
-			player.speed = player.jumpForce;
-			player.animate = true;
-		}
+		player.speed = player.jumpForce;
+		player.animate = true;
 	}
 
 	void Anitmation(Player& player, Texture2D& playerSheet, float deltaTime)

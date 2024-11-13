@@ -23,7 +23,9 @@ namespace Sprites
 		Texture2D fence;
 	};
 
-	void initSprites(Sprites& sprites);
-	void unloadSprites(Sprites& sprites);
+	extern Sprites sprites;
+
+	void initSprites();
+	void unloadSprites();
 
 }

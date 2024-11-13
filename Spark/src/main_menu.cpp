@@ -4,7 +4,7 @@
 
 namespace MAIN_MENU
 {
-	static const int maxButtons = 4;
+	static const int maxButtons = 5;
 	static BUTTON::Button buttons[maxButtons];
 	Texture2D gamesTitle;
 
@@ -75,15 +75,17 @@ namespace MAIN_MENU
 			buttons[i].rect = { startX, startY + i * (BUTTON::buttonHeight + BUTTON::buttonSpacing), BUTTON::buttonWidth, BUTTON::buttonHeight };
 		}
 
-		buttons[0].option = GAME_STATES::GAME_STATES::PLAYING;
-		buttons[1].option = GAME_STATES::GAME_STATES::RULES;
-		buttons[2].option = GAME_STATES::GAME_STATES::CREDITS;
-		buttons[3].option = GAME_STATES::GAME_STATES::WANT_TO_EXIT;
+		buttons[0].option = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
+		buttons[1].option = GAME_STATES::GAME_STATES::TWO_PLAYER_MODE;
+		buttons[2].option = GAME_STATES::GAME_STATES::MAIN_MENU;
+		buttons[3].option = GAME_STATES::GAME_STATES::MAIN_MENU;
+		buttons[4].option = GAME_STATES::GAME_STATES::EXIT;
 
-		buttons[0].text = "PLAY";
-		buttons[1].text = "RULES";
-		buttons[2].text = "CREDITS";
-		buttons[3].text = "EXIT";
+		buttons[0].text = "1P MODE";
+		buttons[1].text = "2P MODE";
+		buttons[2].text = "RULES";
+		buttons[3].text = "CREDITS";
+		buttons[4].text = "EXIT";
 
 		Color outline = BLACK;
 	}

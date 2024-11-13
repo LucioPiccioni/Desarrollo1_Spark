@@ -2,7 +2,9 @@
 
 namespace Sprites
 {
-	void initSprites(Sprites& sprites)
+	Sprites sprites = {};
+
+	void initSprites()
 	{
 		sprites.playerSheet = LoadTexture("res/birdSpriteSheet.png");
 		sprites.pipeImage = LoadTexture("res/pipe.png");
@@ -13,7 +15,7 @@ namespace Sprites
 		sprites.fence = LoadTexture("res/Paralax/night fence.png");
 	}
 
-	void unloadSprites(Sprites& sprites)
+	void unloadSprites()
 	{
 		UnloadTexture(sprites.playerSheet);
 		UnloadTexture(sprites.pipeImage);

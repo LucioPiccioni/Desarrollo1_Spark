@@ -6,7 +6,7 @@
 #include "state_machine.h"
 #include "player.h"
 
-namespace GAMEPLAY1P
+namespace GAMEPLAY2P
 {
 	void initializeGame();
 
@@ -18,7 +18,7 @@ namespace GAMEPLAY1P
 
 	void updateTexturesPos(float deltaTime);
 
-	bool DidPlayerDied();
+	bool DidPlayerDied(Vector2 pos, float radius);
 
 	void drawGame();
 
@@ -26,7 +26,7 @@ namespace GAMEPLAY1P
 
 	void drawFrontAssets();
 
-	bool AddPoint();
+	bool AddPoint(Vector2 pos);
 
 	void unInitGame();
 }

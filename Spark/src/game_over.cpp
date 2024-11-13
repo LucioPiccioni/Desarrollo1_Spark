@@ -1,6 +1,7 @@
 #include "game_over.h"
 
 #include "gameplay.h"
+#include "gameplay2p.h"
 
 #include "button.h"
 #include "game_data.h"
@@ -34,6 +35,7 @@ namespace GAME_OVER
 
 	void update(GAME_STATES::GAME_STATES& gameState)
 	{
+
 		mouse = GetMousePosition();
 
 		for (int i = 0; i < maxButtons; i++)
@@ -49,8 +51,11 @@ namespace GAME_OVER
 
 		if (gameState == GAME_STATES::GAME_STATES::REPLAY)
 		{
-			gameState = GAME_STATES::GAME_STATES::PLAYING;
-			GAMEPLAY::initializeGame();
+			gameState = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
+			{
+				GAMEPLAY1P::initializeGame();
+				GAMEPLAY2P::initializeGame();
+			}
 		}
 	}
 
