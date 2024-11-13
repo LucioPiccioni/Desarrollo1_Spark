@@ -5,11 +5,11 @@
 namespace MAIN_MENU
 {
 
-	void initializeMenu(GAME_STATES::GAME_STATES& gameState);
+	void initializeMenu();
 
 	void updateMenu(GAME_STATES::GAME_STATES& gameState);
 
-	static void initializeButtons();
+	void initializeButtons();
 
 	void drawMenu();
 

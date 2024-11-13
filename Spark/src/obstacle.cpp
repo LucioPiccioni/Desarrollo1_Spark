@@ -1,25 +1,30 @@
 #include "obstacle.h"
-#include "game_data.h"
 
 #include "raylib.h"
-#include <list>
+
+#include "game_data.h"
 
 namespace Obstacle
 {
+	float actualSpeed = minSpeed;
+
+	float actualSpacing = maxSpacing;
+
+	float spawnTimer = 0.0f;
 
 	Obstacle Creator()
 	{
-		PipeSet newPipeSet = {};
+		Obstacle newPipeSet = {};
 
 		const float pipeWidth = 80;
-		const float pipeHeight = screenHeight;
+		const float pipeHeight = SCREEN_HEIGHT;
 
-		newPipeSet.top.rect.x = screenWidth + newPipeSet.top.rect.width;
+		newPipeSet.top.rect.x = SCREEN_WIDTH + newPipeSet.top.rect.width;
 
 		newPipeSet.top.angle = 180 * (PI / 180.0f);
 
 #pragma warning(disable:4244)
-		newPipeSet.top.rect.y = rand() % (static_cast<int>(screenHeight - actualSpacing)) - pipeHeight;
+		newPipeSet.top.rect.y = rand() % (static_cast<int>(SCREEN_HEIGHT - actualSpacing)) - pipeHeight;
 #pragma warning(default:4244)
 
 		newPipeSet.bottom.rect.x = newPipeSet.top.rect.x;
@@ -37,54 +42,41 @@ namespace Obstacle
 
 	void updateObstacle(Obstacle& obstacles, float deltaTime)
 	{
-		obstacles.top.rect.x -= obstacle.speed * deltaTime;
-		obstacles.bottom.rect.x = obstacle.top.rect.x;
+		obstacles.top.rect.x -= actualSpeed * deltaTime;
+		obstacles.bottom.rect.x = obstacles.top.rect.x;
 	}
 
-	void drawObstacle(std::list<Obstacle>& obstacles, Texture2D& pipeTexture)
+	void drawObstacle(Obstacle obstacle, Texture2D& pipeTexture)
 	{
-		for (std::list<Obstacle>::iterator pipeSetIt = obstacle.begin(); pipeSetIt != obstacle.end(); pipeSetIt++)
-		{
-			DrawRectangleRec(pipeSetIt->top.rect, GREEN);
-			DrawRectangleRec(pipeSetIt->bottom.rect, RED);
+		DrawRectangleRec(obstacle.top.rect, GREEN);
+		DrawRectangleRec(obstacle.bottom.rect, RED);
 
-			pipeSetIt->top.rect.x += pipeSetIt->top.rect.width / 2;
-			pipeSetIt->top.rect.y += pipeSetIt->top.rect.height / 2;
+		obstacle.top.rect.x += obstacle.top.rect.width / 2;
+		obstacle.top.rect.y += obstacle.top.rect.height / 2;
 
-			float pipeSpriteWidth = static_cast<float>(pipeTexture.width);
-			float pipeSpriteHeight = static_cast<float>(pipeTexture.height);
+		float pipeSpriteWidth = static_cast<float>(pipeTexture.width);
+		float pipeSpriteHeight = static_cast<float>(pipeTexture.height);
 
-			DrawTexturePro(
-				pipeTexture,
-				Rectangle{ 0,0, pipeSpriteWidth, pipeSpriteHeight },
-				pipeSetIt->top.rect,
-				Vector2{ pipeSetIt->top.rect.width / 2, pipeSetIt->top.rect.height / 2 },
-				180.0f,
-				WHITE);
+		DrawTexturePro(
+			pipeTexture,
+			Rectangle{ 0,0, pipeSpriteWidth, pipeSpriteHeight },
+			obstacle.top.rect,
+			Vector2{ obstacle.top.rect.width / 2, obstacle.top.rect.height / 2 },
+			180.0f,
+			WHITE);
 
-			DrawTexturePro(
-				pipeTexture,
-				Rectangle{ 0,0,pipeSpriteWidth, pipeSpriteHeight },
-				pipeSetIt->bottom.rect,
-				Vector2{ 0,0 },
-				pipeSetIt->bottom.angle,
-				WHITE);
-		}
+		DrawTexturePro(
+			pipeTexture,
+			Rectangle{ 0,0,pipeSpriteWidth, pipeSpriteHeight },
+			obstacle.bottom.rect,
+			Vector2{ 0,0 },
+			obstacle.bottom.angle,
+			WHITE);
 	}
 
-	void relocateObstacle(std::list<Obstacle>& obstacles)
+	bool relocateObstacle(Obstacle& obstacle)
 	{
-		if (!obstacle.empty())
-		{
-			for (std::list<Obstacle>::iterator pipeSetIt = obstacles.begin(); pipeSetIt != obstacles.end(); pipeSetIt++)
-			{
-				if (pipeSetIt->top.rect.x + pipeSetIt->top.rect.width <= 0.0f)
-				{
-					obstacle.erase(pipeSetIt);
-					break;
-				}
-			}
-		}
+		return (obstacle.top.rect.x + obstacle.top.rect.width <= 0.0f);
 	}
 
 }

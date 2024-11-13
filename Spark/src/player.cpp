@@ -1,43 +1,80 @@
 #include "player.h"
+
 #include "raylib.h"
 
-namespace Player
+#include "game_data.h"
+
+namespace PLAYER
 {
-
-	void initializePlayer(Player& auxPlayer)
+	void initializePlayer(Player& player, Texture2D& playerSheet)
 	{
-		auxPlayer.gravityValue = 250;
-		auxPlayer.speed = 0;
-		auxPlayer.size = 30;
-		auxPlayer.pos = { screenWidth / 5, screenHeight / 2 };
+		player.pos = { SCREEN_WIDTH / 5, SCREEN_HEIGHT / 2 };
+		player.frameRec = { 0.0f, 0.0f, (float)playerSheet.width / 3, (float)playerSheet.height };
+		player.size = 64;
+		player.radius = player.size / 2;
+
+		player.jumpForce = -300;
+		player.gravityValue = 500;
+
+		player.points = 0;
+
+		player.speed = 0;
+		player.animate = false;
 	}
 
-	void resetPlayer(Player& auxPlayer)
+	void resetPlayer(Player& player)
 	{
-		auxPlayer.pos = { screenWidth / 5, screenHeight / 2 };
+		player.pos = { SCREEN_WIDTH / 5, SCREEN_HEIGHT / 2 };
 	}
 
-	void movePlayerUp(Player& auxPlayer)
+	void movePlayerUp(Player& player)
 	{
 		if (IsKeyPressed(KEY_SPACE))
 		{
-			auxPlayer.speed = auxPlayer.jumpForce;
-			auxPlayer.animate = true;
+			player.speed = player.jumpForce;
+			player.animate = true;
 		}
 	}
 
-	void movePlayerDown(Player& auxPlayer, float deltaTime)
+	void Anitmation(Player& player, Texture2D& playerSheet, float deltaTime)
 	{
-		auxPlayer.speed += auxPlayer.gravityValue * deltaTime;
-		auxPlayer.pos.y += auxPlayer.speed * deltaTime;
+		if (player.animate)
+		{
+			player.framesCounter += deltaTime;
+
+			const float frameDuration = 0.12f;
+
+			if (player.framesCounter >= frameDuration)
+			{
+				player.framesCounter -= frameDuration;
+				player.currentFrame++;
+
+				if (player.currentFrame > 2)
+				{
+					player.currentFrame = 0;
+					player.animate = false;
+				}
+
+				player.frameRec.x = static_cast<float>(player.currentFrame) * (playerSheet.width / 3.0f);
+			}
+		}
 	}
 
-	void drawPlayer(Player& auxPlayer, Texture2D& playerSheet)
+	void movePlayerDown(Player& player, float deltaTime)
 	{
+		player.speed += player.gravityValue * deltaTime;
+		player.pos.y += player.speed * deltaTime;
+	}
+
+	void drawPlayer(Player player, Texture2D& playerSheet)
+	{
+		player.pos.x += playerSheet.width / 2;
+		player.pos.y += playerSheet.height / 2;
+
 		DrawTexturePro(
 			playerSheet,
-			auxPlayer.frameRec,
-			Rectangle{ auxPlayer.pos.x - auxPlayer.size / 2, auxPlayer.pos.y - auxPlayer.size / 2, auxPlayer.size, auxPlayer.size },
+			player.frameRec,
+			Rectangle{ player.pos.x - player.size / 2, player.pos.y - player.size / 2, player.size, player.size },
 			Vector2{ static_cast<float>(playerSheet.width) / 2, static_cast<float>(playerSheet.height) / 2 },
 			0,
 			WHITE);

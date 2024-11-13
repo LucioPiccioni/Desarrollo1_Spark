@@ -1,9 +1,12 @@
 #pragma once
 
+#include <list>
+
 #include "raylib.h"
 
 namespace Obstacle
 {
+	extern float spawnTimer;
 
 	struct Pipe
 	{
@@ -17,21 +20,22 @@ namespace Obstacle
 
 		Pipe top = {};
 		Pipe bottom = {};
-
-		const float speed = 150;
-
 	};
 
+	const float minSpeed = 150;
+	extern float actualSpeed;
+	const float maxSpeed = 300;
+
 	const float maxSpacing = 384;
-	float actualSpacing;
+	extern float actualSpacing;
 	const float minSpacing = 70;
 
 	Obstacle Creator();
 
-	void updateObstacle(Obstacle& obstacle);
+	void updateObstacle(Obstacle& obstacles, float deltaTime);
 
-	void drawObstacle(Obstacle obstacle);
+	void drawObstacle(Obstacle obstacles, Texture2D& pipeTexture);
 
-	void relocateObstacle(std::list<Obstacle>& obstacle);
+	bool relocateObstacle(Obstacle& obstacle);
 
 }

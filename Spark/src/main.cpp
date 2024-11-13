@@ -2,6 +2,7 @@
 
 int main()
 {
-	Obstacle::runProgram();
+	SCENE_MANAGER::runProgram();
+
 	return 0;
 }

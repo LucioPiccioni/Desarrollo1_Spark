@@ -8,6 +8,14 @@ namespace SCENE_MANAGER
 	
 	void runProgram();
 
+	void initialize();
+
+	void update();
+
+	void draw();
+
+	void close();
+
 }
 
 

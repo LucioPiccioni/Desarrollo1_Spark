@@ -8,7 +8,6 @@
 
 namespace BUTTON
 {
-
 	struct Button
 	{
 		std::string text;

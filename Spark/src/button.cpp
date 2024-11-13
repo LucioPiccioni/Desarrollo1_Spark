@@ -40,6 +40,6 @@ namespace BUTTON
 		return (mouse.x >= button.rect.x &&
 			mouse.x <= button.rect.x + button.rect.width &&
 			mouse.y >= button.rect.y &&
-			mouse.y <= button.rect.y + button.rect.height) && IsMouseButtonPressed(MOUSE_BUTTON_LEFT);
+			mouse.y <= button.rect.y + button.rect.height);
 	}
 }

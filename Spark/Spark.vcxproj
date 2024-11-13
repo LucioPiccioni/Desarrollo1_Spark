@@ -22,9 +22,11 @@
     <ClCompile Include="src\button.cpp" />
     <ClCompile Include="src\game_data.cpp" />
     <ClCompile Include="src\gameplay.cpp" />
+    <ClCompile Include="src\game_over.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\main_menu.cpp" />
     <ClCompile Include="src\obstacle.cpp" />
+    <ClCompile Include="src\pause.cpp" />
     <ClCompile Include="src\player.cpp" />
     <ClCompile Include="src\scene_manager.cpp" />
     <ClCompile Include="src\sprites.cpp" />
@@ -34,8 +36,10 @@
     <ClInclude Include="src\button.h" />
     <ClInclude Include="src\game_data.h" />
     <ClInclude Include="src\gameplay.h" />
+    <ClInclude Include="src\game_over.h" />
     <ClInclude Include="src\main_menu.h" />
     <ClInclude Include="src\obstacle.h" />
+    <ClInclude Include="src\pause.h" />
     <ClInclude Include="src\player.h" />
     <ClInclude Include="src\scene_manager.h" />
     <ClInclude Include="src\sprites.h" />

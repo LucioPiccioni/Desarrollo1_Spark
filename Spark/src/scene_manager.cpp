@@ -1,29 +1,29 @@
 #include "scene_manager.h"
-#include "state_machine.h"
-#include "gameplay.h"
-#include "main_menu.h"
+
 #include "raylib.h"
 
+#include "state_machine.h"
+
+#include "gameplay.h"
+
+#include "pause.h"
+
+#include "game_over.h"
+
+#include "main_menu.h"
+#include "sprites.h"
+#include "player.h"
 
 namespace SCENE_MANAGER
 {
-
-	GAME_STATES::GAME_STATES gameState;
-
-	static void initialize();
-
-	static void update();
-
-	static void draw();
-
-	static void close();
+	GAME_STATES::GAME_STATES gameState = GAME_STATES::GAME_STATES::MAIN_MENU;
 
 
 	void runProgram()
 	{
 		initialize();
 
-		while (!WindowShouldClose())
+		while (!WindowShouldClose() && gameState != GAME_STATES::GAME_STATES::EXIT)
 		{
 			update();
 
@@ -33,70 +33,98 @@ namespace SCENE_MANAGER
 		close();
 	}
 
-	static void initialize()
+	void initialize()
 	{
-		InitWindow(800, 600, "BOKITA");
+		InitWindow(800, 600, "Flappy Bird");
 
-		MAIN_MENU::initializeMenu(gameState);
-		GamePlay::initializeGame(gameState);
+		Sprites::initSprites(GAMEPLAY::sprites);
+		GAMEPLAY::initializeGame();
+		MAIN_MENU::initializeMenu();
+		PAUSE::initButtons();
+		GAME_OVER::initButtons();
 
-		gameState.currentState = GAME_STATES::GAME_STATES::RUNNING;
-		gameState.nextState = GAME_STATES::GAME_STATES::RUNNING;
+		SetExitKey(0);
 	}
 
-
-	static void update()
+	void update()
 	{
-		switch (gameState.currentState)
+		switch (gameState)
 		{
-		case GAME_STATES::GAME_STATES::MENU:
+		case GAME_STATES::GAME_STATES::MAIN_MENU:
 			MAIN_MENU::updateMenu(gameState);
 			break;
-		case GAME_STATES::GAME_STATES::PAUSED:
+
+		case GAME_STATES::GAME_STATES::PLAYING:
+			GAMEPLAY::updateGame(gameState);
 			break;
-		case GAME_STATES::GAME_STATES::RUNNING:
-			GamePlay::updateGame(gameState);
+
+		case GAME_STATES::GAME_STATES::PAUSE:
+			PAUSE::update(gameState);
 			break;
-		case GAME_STATES::GAME_STATES::GAMEOVER:
+
+		case GAME_STATES::GAME_STATES::GAME_OVER:
+			GAME_OVER::update(gameState);
 			break;
+
+		case GAME_STATES::GAME_STATES::RULES:
+			break;
+
 		case GAME_STATES::GAME_STATES::CREDITS:
 			break;
+
+		case GAME_STATES::GAME_STATES::WANT_TO_EXIT:
+			break;
+
 		default:
 			break;
 		}
-
-		gameState.currentState = gameState.nextState;
 	}
 
-	static void draw()
+	void draw()
 	{
 		BeginDrawing();
+
 		ClearBackground(BLACK);
 
-		switch (gameState.currentState)
+		switch (gameState)
 		{
-		case Obstacle::GAME_STATES::MENU:
-			drawMenu();
+		case GAME_STATES::GAME_STATES::MAIN_MENU:
+			MAIN_MENU::drawMenu();
 			break;
-		case Obstacle::GAME_STATES::PAUSED:
+
+		case GAME_STATES::GAME_STATES::PLAYING:
+			GAMEPLAY::drawGame();
 			break;
-		case Obstacle::GAME_STATES::RUNNING:
-			drawGame();
+
+		case GAME_STATES::GAME_STATES::PAUSE:
+			PAUSE::draw(GetFontDefault());
 			break;
-		case Obstacle::GAME_STATES::GAMEOVER:
+
+		case GAME_STATES::GAME_STATES::GAME_OVER:
+			GAME_OVER::draw(GetFontDefault());
 			break;
-		case Obstacle::GAME_STATES::CREDITS:
+
+		case GAME_STATES::GAME_STATES::RULES:
 			break;
+
+		case GAME_STATES::GAME_STATES::CREDITS:
+			break;
+
+		case GAME_STATES::GAME_STATES::WANT_TO_EXIT:
+			break;
+
 		default:
 			break;
 		}
+
 
 		EndDrawing();
 	}
 
-	static void close()
+	void close()
 	{
+		GAMEPLAY::unInitGame();
 		CloseWindow();
 	}
 
-} // namespace spark_luchelli
+}

@@ -25,4 +25,5 @@ namespace Sprites
 
 	void initSprites(Sprites& sprites);
 	void unloadSprites(Sprites& sprites);
+
 }
