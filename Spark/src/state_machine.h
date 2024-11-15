@@ -2,7 +2,7 @@
 
 namespace GAME_STATES
 {
-	enum class GAME_STATES
+	enum class Gamestate
 	{
 		NONE,
 		MAIN_MENU,
@@ -21,6 +21,12 @@ namespace GAME_STATES
 		CONFIRM_EXIT,
 		CANCEL_EXIT,
 		EXIT
+	};
+
+	struct ProgramState
+	{
+		Gamestate actual = Gamestate::MAIN_MENU;
+		Gamestate previus = Gamestate::MAIN_MENU;
 	};
 }
 

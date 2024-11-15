@@ -17,14 +17,13 @@
 
 namespace SCENE_MANAGER
 {
-	GAME_STATES::GAME_STATES gameState = GAME_STATES::GAME_STATES::MAIN_MENU;
-	GAME_STATES::GAME_STATES previusGameMode = GAME_STATES::GAME_STATES::NONE;
+	GAME_STATES::ProgramState programState;
 
 	void runProgram()
 	{
 		initialize();
 
-		while (!WindowShouldClose() && gameState != GAME_STATES::GAME_STATES::EXIT)
+		while (!WindowShouldClose() && programState.actual != GAME_STATES::Gamestate::EXIT)
 		{
 			update();
 
@@ -38,6 +37,9 @@ namespace SCENE_MANAGER
 	{
 		InitWindow(800, 600, "Flappy Bird");
 
+		programState.actual = GAME_STATES::Gamestate::MAIN_MENU;
+		programState.previus = GAME_STATES::Gamestate::NONE;
+
 		SPRITES::initSprites();
 		GAMEPLAY_1P::initializeGame();
 		GAMEPLAY_2P::initializeGame();
@@ -50,36 +52,37 @@ namespace SCENE_MANAGER
 
 	void update()
 	{
-		switch (gameState)
+		switch (programState.actual)
 		{
-		case GAME_STATES::GAME_STATES::MAIN_MENU:
-			MAIN_MENU::updateMenu(gameState);
+		case GAME_STATES::Gamestate::MAIN_MENU:
+			MAIN_MENU::updateMenu(programState);
 			break;
 
-		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
-			previusGameMode = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
-			GAMEPLAY_1P::updateGame(gameState);
+		case GAME_STATES::Gamestate::ONE_PLAYER_MODE:
+			programState.previus = GAME_STATES::Gamestate::ONE_PLAYER_MODE;
+			GAMEPLAY_1P::updateGame(programState);
 			break;
 
-		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
-			previusGameMode = GAME_STATES::GAME_STATES::TWO_PLAYER_MODE;
-			GAMEPLAY_2P::updateGame(gameState);
-
-		case GAME_STATES::GAME_STATES::PAUSE:
-			PAUSE::update(gameState);
+		case GAME_STATES::Gamestate::TWO_PLAYER_MODE:
+			programState.previus = GAME_STATES::Gamestate::TWO_PLAYER_MODE;
+			GAMEPLAY_2P::updateGame(programState);
 			break;
 
-		case GAME_STATES::GAME_STATES::GAME_OVER:
-			GAME_OVER::update(gameState);
+		case GAME_STATES::Gamestate::PAUSE:
+			PAUSE::update(programState);
 			break;
 
-		case GAME_STATES::GAME_STATES::RULES:
+		case GAME_STATES::Gamestate::GAME_OVER:
+			GAME_OVER::update(programState);
 			break;
 
-		case GAME_STATES::GAME_STATES::CREDITS:
+		case GAME_STATES::Gamestate::RULES:
 			break;
 
-		case GAME_STATES::GAME_STATES::WANT_TO_EXIT:
+		case GAME_STATES::Gamestate::CREDITS:
+			break;
+
+		case GAME_STATES::Gamestate::WANT_TO_EXIT:
 			break;
 
 		default:
@@ -93,35 +96,35 @@ namespace SCENE_MANAGER
 
 		ClearBackground(BLACK);
 
-		switch (gameState)
+		switch (programState.actual)
 		{
-		case GAME_STATES::GAME_STATES::MAIN_MENU:
+		case GAME_STATES::Gamestate::MAIN_MENU:
 			MAIN_MENU::drawMenu();
 			break;
 
-		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
+		case GAME_STATES::Gamestate::ONE_PLAYER_MODE:
 			GAMEPLAY_1P::drawGame();
 			break;
 
-		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
+		case GAME_STATES::Gamestate::TWO_PLAYER_MODE:
 			GAMEPLAY_2P::drawGame();
 			break;
 
-		case GAME_STATES::GAME_STATES::PAUSE:
+		case GAME_STATES::Gamestate::PAUSE:
 			PAUSE::draw(GetFontDefault());
 			break;
 
-		case GAME_STATES::GAME_STATES::GAME_OVER:
+		case GAME_STATES::Gamestate::GAME_OVER:
 			GAME_OVER::draw(GetFontDefault());
 			break;
 
-		case GAME_STATES::GAME_STATES::RULES:
+		case GAME_STATES::Gamestate::RULES:
 			break;
 
-		case GAME_STATES::GAME_STATES::CREDITS:
+		case GAME_STATES::Gamestate::CREDITS:
 			break;
 
-		case GAME_STATES::GAME_STATES::WANT_TO_EXIT:
+		case GAME_STATES::Gamestate::WANT_TO_EXIT:
 			break;
 
 		default:

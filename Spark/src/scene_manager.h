@@ -3,9 +3,7 @@
 #include "state_machine.h"
 
 namespace SCENE_MANAGER
-{
-	extern GAME_STATES::GAME_STATES gameState;
-	
+{	
 	void runProgram();
 
 	void initialize();
@@ -15,7 +13,6 @@ namespace SCENE_MANAGER
 	void draw();
 
 	void close();
-
 }
 
 

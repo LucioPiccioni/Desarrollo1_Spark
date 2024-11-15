@@ -12,7 +12,7 @@ namespace GAMEPLAY_1P
 
 	void resetObstacles();
 
-	void updateGame(GAME_STATES::GAME_STATES& gameState);
+	void updateGame(GAME_STATES::ProgramState& gameState);
 
 	void updatePlayer(float deltaTime);
 

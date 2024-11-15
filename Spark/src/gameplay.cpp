@@ -35,10 +35,10 @@ namespace GAMEPLAY_1P
 		Obstacle::spawnTimer = 0;
 	}
 
-	void updateGame(GAME_STATES::GAME_STATES& gameState)
+	void updateGame(GAME_STATES::ProgramState& gameState)
 	{
 		if (IsKeyPressed(KEY_ESCAPE))
-			gameState = GAME_STATES::GAME_STATES::PAUSE;
+			gameState.actual = GAME_STATES::Gamestate::PAUSE;
 
 		float deltaTime = GetFrameTime();
 
@@ -63,13 +63,12 @@ namespace GAMEPLAY_1P
 			player.points++;
 
 		if (DidPlayerDied())
-			gameState = GAME_STATES::GAME_STATES::GAME_OVER;
+			gameState.actual = GAME_STATES::Gamestate::GAME_OVER;
 	}
 
 	void drawGame()
 	{
 		std::string text = "Points: " + std::to_string(player.points) + ".";
-
 
 		drawBackgroundAssets();
 

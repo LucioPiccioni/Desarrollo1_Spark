@@ -3,6 +3,7 @@
 #include "game_data.h"
 #include "gameplay.h"
 #include "button.h"
+#include <gameplay2p.h>
 
 namespace PAUSE
 {
@@ -16,9 +17,9 @@ namespace PAUSE
 		float startY = SCREEN_HEIGHT - (BUTTON::buttonHeight * buttonCount + BUTTON::buttonSpacing * (buttonCount - 1));
 
 
-		buttons[0].option = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
-		buttons[1].option = GAME_STATES::GAME_STATES::MAIN_MENU;
-		buttons[2].option = GAME_STATES::GAME_STATES::WANT_TO_EXIT;
+		buttons[0].option = GAME_STATES::Gamestate::ONE_PLAYER_MODE;
+		buttons[1].option = GAME_STATES::Gamestate::MAIN_MENU;
+		buttons[2].option = GAME_STATES::Gamestate::WANT_TO_EXIT;
 
 		buttons[0].text = "RESUME";
 		buttons[1].text = "MENU";
@@ -34,7 +35,7 @@ namespace PAUSE
 
 	}
 
-	void update(GAME_STATES::GAME_STATES& gameState)
+	void update(GAME_STATES::ProgramState& gameState)
 	{
 		mouse = GetMousePosition();
 
@@ -51,13 +52,22 @@ namespace PAUSE
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
-					gameState = buttons[i].option;
+					gameState.actual = buttons[i].option;
 				}
+			}
+			else
+			{
+				buttons[i].color = { 255, 182, 193, 255 };
 			}
 		}
 
-		if (gameState == GAME_STATES::GAME_STATES::MAIN_MENU)
-			GAMEPLAY_1P::initializeGame();
+		if (gameState.actual == GAME_STATES::Gamestate::MAIN_MENU)
+		{
+			if (gameState.previus == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
+				GAMEPLAY_1P::initializeGame();
+			else
+				GAMEPLAY_2P::initializeGame();
+		}
 	}
 
 	void draw(Font font)

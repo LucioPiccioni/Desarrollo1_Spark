@@ -13,7 +13,7 @@ namespace MAIN_MENU
 		initializeButtons();
 	}
 
-	void updateMenu(GAME_STATES::GAME_STATES& gameState)
+	void updateMenu(GAME_STATES::ProgramState& gameState)
 	{
 		Vector2 mouse = GetMousePosition();
 
@@ -29,7 +29,7 @@ namespace MAIN_MENU
 				}
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-					gameState = buttons[i].option;
+					gameState.actual = buttons[i].option;
 			}
 			else
 			{
@@ -58,11 +58,6 @@ namespace MAIN_MENU
 		{
 			BUTTON::drawButton(buttons[i], GetFontDefault());
 		}
-
-		for (int i = 0; i < maxButtons; i++)
-		{
-			BUTTON::drawButton(buttons[i], GetFontDefault());
-		}
 	}
 
 	void initializeButtons()
@@ -73,13 +68,14 @@ namespace MAIN_MENU
 		for (int i = 0; i < maxButtons; i++)
 		{
 			buttons[i].rect = { startX, startY + i * (BUTTON::buttonHeight + BUTTON::buttonSpacing), BUTTON::buttonWidth, BUTTON::buttonHeight };
+			buttons[i].color = BLACK;
 		}
 
-		buttons[0].option = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
-		buttons[1].option = GAME_STATES::GAME_STATES::TWO_PLAYER_MODE;
-		buttons[2].option = GAME_STATES::GAME_STATES::MAIN_MENU;
-		buttons[3].option = GAME_STATES::GAME_STATES::MAIN_MENU;
-		buttons[4].option = GAME_STATES::GAME_STATES::EXIT;
+		buttons[0].option = GAME_STATES::Gamestate::ONE_PLAYER_MODE;
+		buttons[1].option = GAME_STATES::Gamestate::TWO_PLAYER_MODE;
+		buttons[2].option = GAME_STATES::Gamestate::MAIN_MENU;
+		buttons[3].option = GAME_STATES::Gamestate::MAIN_MENU;
+		buttons[4].option = GAME_STATES::Gamestate::EXIT;
 
 		buttons[0].text = "1P MODE";
 		buttons[1].text = "2P MODE";
@@ -87,7 +83,6 @@ namespace MAIN_MENU
 		buttons[3].text = "CREDITS";
 		buttons[4].text = "EXIT";
 
-		Color outline = BLACK;
 	}
 
 }

@@ -10,52 +10,59 @@ namespace GAME_OVER
 {
 	const int maxButtons = 3;
 	Vector2 mouse;
-	BUTTON::Button button[maxButtons] = {};
+	BUTTON::Button buttons[maxButtons] = {};
 
 	void initButtons()
 	{
-		Color outline = BLACK;
-
 		float startX = (static_cast<float>(SCREEN_WIDTH) - BUTTON::buttonWidth) / 2;
 		float startY = ((static_cast<float>(SCREEN_HEIGHT) - SCREEN_HEIGHT / 5) - (BUTTON::buttonHeight * maxButtons + BUTTON::buttonSpacing * (maxButtons - 1)));
 
 		for (int i = 0; i < maxButtons; i++)
 		{
-			button[i].rect = { startX, startY + i * (BUTTON::buttonHeight + BUTTON::buttonSpacing), BUTTON::buttonWidth, BUTTON::buttonHeight };
+			buttons[i].rect = { startX, startY + i * (BUTTON::buttonHeight + BUTTON::buttonSpacing), BUTTON::buttonWidth, BUTTON::buttonHeight };
 		}
 
-		button[0].option = GAME_STATES::GAME_STATES::REPLAY;
-		button[1].option = GAME_STATES::GAME_STATES::MAIN_MENU;
-		button[2].option = GAME_STATES::GAME_STATES::EXIT;
+		buttons[0].option = GAME_STATES::Gamestate::REPLAY;
+		buttons[1].option = GAME_STATES::Gamestate::MAIN_MENU;
+		buttons[2].option = GAME_STATES::Gamestate::EXIT;
 
-		button[0].text = "REPLAY";
-		button[1].text = "MENU";
-		button[2].text = "EXIT";
+		buttons[0].text = "REPLAY";
+		buttons[1].text = "MENU";
+		buttons[2].text = "EXIT";
 	}
 
-	void update(GAME_STATES::GAME_STATES& gameState)
+	void update(GAME_STATES::ProgramState& gameState)
 	{
-
 		mouse = GetMousePosition();
 
 		for (int i = 0; i < maxButtons; i++)
 		{
-			if (BUTTON::isButtonClicked(mouse, button[i]))
+			if (BUTTON::isButtonClicked(mouse, buttons[i]))
 			{
-				button[i].color = IsMouseButtonDown(MOUSE_LEFT_BUTTON) ? YELLOW : WHITE;
+				buttons[i].color = WHITE;
+
+				if (IsMouseButtonDown(MOUSE_LEFT_BUTTON))
+				{
+					buttons[i].color = YELLOW;
+				}
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
-					gameState = button[i].option;
+					gameState.actual = buttons[i].option;
+			}
+			else
+			{
+				buttons[i].color = { 255, 182, 193, 255 };
 			}
 		}
 
-		if (gameState == GAME_STATES::GAME_STATES::REPLAY)
+		if (gameState.actual == GAME_STATES::Gamestate::REPLAY)
 		{
-			gameState = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
-			{
+			if (gameState.previus == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
 				GAMEPLAY_1P::initializeGame();
+			else
 				GAMEPLAY_2P::initializeGame();
-			}
+
+			gameState.actual = gameState.previus;
 		}
 	}
 
@@ -68,7 +75,7 @@ namespace GAME_OVER
 
 		for (int i = 0; i < maxButtons; i++)
 		{
-			BUTTON::drawButton(button[i], GetFontDefault());
+			BUTTON::drawButton(buttons[i], GetFontDefault());
 		}
 	}
 }

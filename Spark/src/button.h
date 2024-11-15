@@ -14,7 +14,7 @@ namespace BUTTON
 
 		Rectangle rect = { 0,0,0,0 };
 
-		GAME_STATES::GAME_STATES option = GAME_STATES::GAME_STATES::NONE;
+		GAME_STATES::Gamestate option = GAME_STATES::Gamestate::NONE;
 
 		Color color = { 255, 182, 193, 255 };
 		Color outline = { 1, 1, 1, 255 };

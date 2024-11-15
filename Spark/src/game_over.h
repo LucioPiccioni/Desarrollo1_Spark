@@ -7,7 +7,7 @@ namespace GAME_OVER
 {
 	void initButtons();
 
-	void update(GAME_STATES::GAME_STATES& gameState);
+	void update(GAME_STATES::ProgramState& gameState);
 
 	void draw(Font font);
 }

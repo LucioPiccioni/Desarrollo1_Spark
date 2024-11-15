@@ -7,7 +7,7 @@ namespace MAIN_MENU
 
 	void initializeMenu();
 
-	void updateMenu(GAME_STATES::GAME_STATES& gameState);
+	void updateMenu(GAME_STATES::ProgramState& gameState);
 
 	void initializeButtons();
 
