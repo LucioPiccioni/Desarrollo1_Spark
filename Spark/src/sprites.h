@@ -2,7 +2,7 @@
 
 #include "raylib.h"
 
-namespace Sprites
+namespace SPRITES
 {
 	struct SpriteMovement
 	{

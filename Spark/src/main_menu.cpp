@@ -40,7 +40,7 @@ namespace MAIN_MENU
 
 	void drawMenu()
 	{
-		DrawText("v0.3", 0, 0, 20, WHITE);
+		DrawText("v0.4", 0, 0, 20, WHITE);
 
 		DrawTexturePro(
 			gamesTitle,

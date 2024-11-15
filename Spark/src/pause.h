@@ -12,6 +12,4 @@ namespace PAUSE
 	void update(GAME_STATES::GAME_STATES& gameState);
 
 	void draw(Font font);
-
-	void DrawPauseMenu(Font font);
 }

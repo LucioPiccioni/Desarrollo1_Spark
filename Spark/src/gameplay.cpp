@@ -11,11 +11,11 @@
 #include "game_data.h"
 #include "sprites.h"
 
-namespace GAMEPLAY1P
+namespace GAMEPLAY_1P
 {
 	PLAYER::Player player;
 
-	Sprites::SpriteMovement spriteMovement = {};
+	SPRITES::SpriteMovement spriteMovement = {};
 
 	std::list<Obstacle::Obstacle> obstacles;
 
@@ -23,7 +23,7 @@ namespace GAMEPLAY1P
 
 	void initializeGame()
 	{
-		initializePlayer(player, Sprites::sprites.playerSheet);
+		initializePlayer(player, SPRITES::sprites.playerSheet);
 		resetObstacles();
 	}
 
@@ -73,11 +73,11 @@ namespace GAMEPLAY1P
 
 		drawBackgroundAssets();
 
-		drawPlayer(player, Sprites::sprites.playerSheet);
+		drawPlayer(player, SPRITES::sprites.playerSheet);
 
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
-			Obstacle::drawObstacle(*it, Sprites::sprites.pipeImage);
+			Obstacle::drawObstacle(*it, SPRITES::sprites.pipeImage);
 		}
 
 		drawFrontAssets();
@@ -89,49 +89,49 @@ namespace GAMEPLAY1P
 	{
 		Vector2 origin = { 0.0f, 0.0f };
 
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)Sprites::sprites.sky.width, (float)Sprites::sprites.sky.height };
+		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.sky.width, (float)SPRITES::sprites.sky.height };
 
 		Rectangle destRec = { spriteMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
 
 		destRec = { SCREEN_WIDTH + spriteMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
 
 
-		sourceRec = { 0.0f, 0.0f, (float)Sprites::sprites.backBuildings.width, (float)Sprites::sprites.backBuildings.height };
+		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.backBuildings.width, (float)SPRITES::sprites.backBuildings.height };
 
 		destRec = { spriteMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 
 		destRec = { SCREEN_WIDTH + spriteMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 
 
-		sourceRec = { 0.0f, 0.0f, (float)Sprites::sprites.frontBuildings.width, (float)Sprites::sprites.frontBuildings.height };
+		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.frontBuildings.width, (float)SPRITES::sprites.frontBuildings.height };
 
 		destRec = { spriteMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 
 		destRec = { SCREEN_WIDTH + spriteMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(Sprites::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 	}
 
 	void drawFrontAssets()
 	{
 		Vector2 origin = { 0.0f, 0.0f };
 
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)Sprites::sprites.fence.width, (float)Sprites::sprites.fence.height };
+		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.fence.width, (float)SPRITES::sprites.fence.height };
 
-		Rectangle destRec = { spriteMovement.fence, (float)SCREEN_HEIGHT - Sprites::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)Sprites::sprites.fence.height * 2 };
-		DrawTexturePro(Sprites::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
+		Rectangle destRec = { spriteMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
 
-		destRec = { SCREEN_WIDTH + spriteMovement.fence, (float)SCREEN_HEIGHT - Sprites::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)Sprites::sprites.fence.height * 2 };
-		DrawTexturePro(Sprites::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
+		destRec = { SCREEN_WIDTH + spriteMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
 	}
 
 	void unInitGame()
 	{
-		Sprites::unloadSprites();
+		SPRITES::unloadSprites();
 	}
 
 	void updatePlayer(float deltaTime)
@@ -143,7 +143,7 @@ namespace GAMEPLAY1P
 			movePlayerUp(player);
 		}
 
-		PLAYER::Anitmation(player, Sprites::sprites.playerSheet, deltaTime);
+		PLAYER::Anitmation(player, SPRITES::sprites.playerSheet, deltaTime);
 	}
 
 	void updateTexturesPos(float deltaTime)

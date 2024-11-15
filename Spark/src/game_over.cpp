@@ -53,8 +53,8 @@ namespace GAME_OVER
 		{
 			gameState = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
 			{
-				GAMEPLAY1P::initializeGame();
-				GAMEPLAY2P::initializeGame();
+				GAMEPLAY_1P::initializeGame();
+				GAMEPLAY_2P::initializeGame();
 			}
 		}
 	}

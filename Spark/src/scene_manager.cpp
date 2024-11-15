@@ -38,9 +38,9 @@ namespace SCENE_MANAGER
 	{
 		InitWindow(800, 600, "Flappy Bird");
 
-		Sprites::initSprites();
-		GAMEPLAY1P::initializeGame();
-		GAMEPLAY2P::initializeGame();
+		SPRITES::initSprites();
+		GAMEPLAY_1P::initializeGame();
+		GAMEPLAY_2P::initializeGame();
 		MAIN_MENU::initializeMenu();
 		PAUSE::initButtons();
 		GAME_OVER::initButtons();
@@ -58,12 +58,12 @@ namespace SCENE_MANAGER
 
 		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
 			previusGameMode = GAME_STATES::GAME_STATES::ONE_PLAYER_MODE;
-			GAMEPLAY1P::updateGame(gameState);
+			GAMEPLAY_1P::updateGame(gameState);
 			break;
 
 		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
 			previusGameMode = GAME_STATES::GAME_STATES::TWO_PLAYER_MODE;
-			GAMEPLAY2P::updateGame(gameState);
+			GAMEPLAY_2P::updateGame(gameState);
 
 		case GAME_STATES::GAME_STATES::PAUSE:
 			PAUSE::update(gameState);
@@ -100,11 +100,11 @@ namespace SCENE_MANAGER
 			break;
 
 		case GAME_STATES::GAME_STATES::ONE_PLAYER_MODE:
-			GAMEPLAY1P::drawGame();
+			GAMEPLAY_1P::drawGame();
 			break;
 
 		case GAME_STATES::GAME_STATES::TWO_PLAYER_MODE:
-			GAMEPLAY2P::drawGame();
+			GAMEPLAY_2P::drawGame();
 			break;
 
 		case GAME_STATES::GAME_STATES::PAUSE:
@@ -134,7 +134,7 @@ namespace SCENE_MANAGER
 
 	void close()
 	{
-		GAMEPLAY1P::unInitGame();
+		GAMEPLAY_1P::unInitGame();
 		CloseWindow();
 	}
 

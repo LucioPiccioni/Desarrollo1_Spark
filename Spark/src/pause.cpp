@@ -57,7 +57,7 @@ namespace PAUSE
 		}
 
 		if (gameState == GAME_STATES::GAME_STATES::MAIN_MENU)
-			GAMEPLAY1P::initializeGame();
+			GAMEPLAY_1P::initializeGame();
 	}
 
 	void draw(Font font)

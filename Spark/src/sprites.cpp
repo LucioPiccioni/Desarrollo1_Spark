@@ -1,6 +1,6 @@
 #include "sprites.h"
 
-namespace Sprites
+namespace SPRITES
 {
 	Sprites sprites = {};
 

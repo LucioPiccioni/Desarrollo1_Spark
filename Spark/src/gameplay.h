@@ -6,7 +6,7 @@
 #include "state_machine.h"
 #include "player.h"
 
-namespace GAMEPLAY1P
+namespace GAMEPLAY_1P
 {
 	void initializeGame();
 
