@@ -17,8 +17,6 @@ namespace GAMEPLAY_2P
 
 	PLAYER::Player player[maxPlayers];
 
-	SPRITES::SpriteMovement spriteMovement = {};
-
 	std::list<Obstacle::Obstacle> obstacles;
 
 	bool shouldReset = 0;
@@ -35,6 +33,7 @@ namespace GAMEPLAY_2P
 
 	void resetObstacles()
 	{
+		SPRITES::spritesMovement = { 0,0,0,0 };
 		obstacles.clear();
 		Obstacle::actualSpacing = Obstacle::maxSpacing;
 		Obstacle::actualSpeed = Obstacle::minSpeed;
@@ -50,7 +49,7 @@ namespace GAMEPLAY_2P
 
 		updatePlayer(deltaTime);
 
-		updateTexturesPos(deltaTime);
+		SPRITES::updateTexturesPos(deltaTime);
 
 		if (Obstacle::spawnTimer <= 0)
 		{
@@ -80,7 +79,7 @@ namespace GAMEPLAY_2P
 
 	void drawGame()
 	{
-		drawBackgroundAssets();
+		SPRITES::drawBackgroundAssets();
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
@@ -92,61 +91,12 @@ namespace GAMEPLAY_2P
 			Obstacle::drawObstacle(*it, SPRITES::sprites.pipeImage);
 		}
 
-		drawFrontAssets();
-
-	
-			std::string text = "Points: " + std::to_string(player[0].points) + ".";
-			DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
-		
-	}
-
-	void drawBackgroundAssets()
-	{
-		Vector2 origin = { 0.0f, 0.0f };
-
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.sky.width, (float)SPRITES::sprites.sky.height };
-
-		Rectangle destRec = { spriteMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
-
-		destRec = { SCREEN_WIDTH + spriteMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+		SPRITES::drawFrontAssets();
 
 
-		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.backBuildings.width, (float)SPRITES::sprites.backBuildings.height };
+		std::string text = "Points: " + std::to_string(player[0].points) + ".";
+		DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
 
-		destRec = { spriteMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
-
-		destRec = { SCREEN_WIDTH + spriteMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
-
-
-		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.frontBuildings.width, (float)SPRITES::sprites.frontBuildings.height };
-
-		destRec = { spriteMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
-
-		destRec = { SCREEN_WIDTH + spriteMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
-		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
-	}
-
-	void drawFrontAssets()
-	{
-		Vector2 origin = { 0.0f, 0.0f };
-
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.fence.width, (float)SPRITES::sprites.fence.height };
-
-		Rectangle destRec = { spriteMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
-		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
-
-		destRec = { SCREEN_WIDTH + spriteMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
-		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
-	}
-
-	void unInitGame()
-	{
-		SPRITES::unloadSprites();
 	}
 
 	void updatePlayer(float deltaTime)
@@ -171,26 +121,6 @@ namespace GAMEPLAY_2P
 		{
 			PLAYER::Anitmation(player[i], SPRITES::sprites.playerSheet, deltaTime);
 		}
-	}
-
-	void updateTexturesPos(float deltaTime)
-	{
-		spriteMovement.sky -= (Obstacle::actualSpeed * 0.05f) * deltaTime;
-		spriteMovement.backBuildings -= (Obstacle::actualSpeed - 90) * deltaTime;
-		spriteMovement.frontBuildings -= (Obstacle::actualSpeed - 50) * deltaTime;
-		spriteMovement.fence -= (Obstacle::actualSpeed + 100) * deltaTime;
-
-		if (spriteMovement.sky <= -SCREEN_WIDTH)
-			spriteMovement.sky = 0;
-
-		if (spriteMovement.backBuildings <= -SCREEN_WIDTH)
-			spriteMovement.backBuildings = 0;
-
-		if (spriteMovement.frontBuildings <= -SCREEN_WIDTH)
-			spriteMovement.frontBuildings = 0;
-
-		if (spriteMovement.fence <= -SCREEN_WIDTH)
-			spriteMovement.fence = 0;
 	}
 
 	bool AddPoint(Vector2 pos)

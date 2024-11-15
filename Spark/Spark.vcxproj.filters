@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Engine">
       <UniqueIdentifier>{7aaf016b-424e-48a7-a3cb-7a4f0301b07c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Engine">
+      <UniqueIdentifier>{5f839675-2b6e-4f40-852a-281df21efa40}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\state_machine.cpp">

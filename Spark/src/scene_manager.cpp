@@ -137,7 +137,7 @@ namespace SCENE_MANAGER
 
 	void close()
 	{
-		GAMEPLAY_1P::unInitGame();
+		SPRITES::unloadSprites();
 		CloseWindow();
 	}
 

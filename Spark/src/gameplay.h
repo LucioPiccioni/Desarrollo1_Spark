@@ -22,11 +22,5 @@ namespace GAMEPLAY_1P
 
 	void drawGame();
 
-	void drawBackgroundAssets();
-
-	void drawFrontAssets();
-
 	bool AddPoint();
-
-	void unInitGame();
 }

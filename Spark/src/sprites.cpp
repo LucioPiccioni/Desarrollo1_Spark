@@ -1,8 +1,11 @@
 #include "sprites.h"
+#include "obstacle.h"
+#include "game_data.h"
 
 namespace SPRITES
 {
 	Sprites sprites = {};
+	SpriteMovement spritesMovement = {};
 
 	void initSprites()
 	{
@@ -25,4 +28,80 @@ namespace SPRITES
 		UnloadTexture(sprites.fence);
 	}
 
+	void updateTexturesPos(float deltaTime)
+	{
+		float skySpeed = (Obstacle::actualSpeed * 0.05f) * deltaTime;
+		float backBuildingSpeed = (Obstacle::actualSpeed - 90) * deltaTime;
+		float frontBuildingSpeed = (Obstacle::actualSpeed - 50) * deltaTime;
+		float fenceSpeed = (Obstacle::actualSpeed + 100) * deltaTime;
+
+		if (skySpeed > 0)
+			SPRITES::spritesMovement.sky -= skySpeed;
+
+		if (backBuildingSpeed > 0)
+			SPRITES::spritesMovement.backBuildings -= backBuildingSpeed;
+
+		if (frontBuildingSpeed > 0)
+			SPRITES::spritesMovement.frontBuildings -= frontBuildingSpeed;
+
+		if (fenceSpeed > 0)
+			SPRITES::spritesMovement.fence -= fenceSpeed;
+
+
+		if (SPRITES::spritesMovement.sky <= -SCREEN_WIDTH)
+			SPRITES::spritesMovement.sky = 0;
+
+		if (SPRITES::spritesMovement.backBuildings <= -SCREEN_WIDTH)
+			SPRITES::spritesMovement.backBuildings = 0;
+
+		if (SPRITES::spritesMovement.frontBuildings <= -SCREEN_WIDTH)
+			SPRITES::spritesMovement.frontBuildings = 0;
+
+		if (SPRITES::spritesMovement.fence <= -SCREEN_WIDTH)
+			SPRITES::spritesMovement.fence = 0;
+	}
+
+	void drawBackgroundAssets()
+	{
+		Vector2 origin = { 0.0f, 0.0f };
+
+		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.sky.width, (float)SPRITES::sprites.sky.height };
+
+		Rectangle destRec = { SPRITES::spritesMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+
+		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
+
+
+		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.backBuildings.width, (float)SPRITES::sprites.backBuildings.height };
+
+		destRec = { SPRITES::spritesMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+
+		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.frontBuildings.width, (float)SPRITES::sprites.frontBuildings.height };
+
+		destRec = { SPRITES::spritesMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+
+		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
+		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
+	}
+
+	void drawFrontAssets()
+	{
+		Vector2 origin = { 0.0f, 0.0f };
+
+		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.fence.width, (float)SPRITES::sprites.fence.height };
+
+		Rectangle destRec = { SPRITES::spritesMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
+
+		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
+	}
 }

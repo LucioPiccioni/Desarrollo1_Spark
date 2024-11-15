@@ -24,8 +24,14 @@ namespace SPRITES
 	};
 
 	extern Sprites sprites;
+	extern SpriteMovement spritesMovement;
 
 	void initSprites();
 	void unloadSprites();
+
+	void updateTexturesPos(float deltaTime);
+
+	void drawBackgroundAssets();
+	void drawFrontAssets();
 
 }

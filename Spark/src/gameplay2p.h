@@ -16,17 +16,9 @@ namespace GAMEPLAY_2P
 
 	void updatePlayer(float deltaTime);
 
-	void updateTexturesPos(float deltaTime);
-
 	bool DidPlayerDied(Vector2 pos, float radius);
 
 	void drawGame();
 
-	void drawBackgroundAssets();
-
-	void drawFrontAssets();
-
 	bool AddPoint(Vector2 pos);
-
-	void unInitGame();
 }

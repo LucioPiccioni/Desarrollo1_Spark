@@ -2,6 +2,7 @@
 
 #include "gameplay.h"
 #include "gameplay2p.h"
+#include "obstacle.h"
 
 #include "button.h"
 #include "game_data.h"
@@ -33,6 +34,8 @@ namespace GAME_OVER
 
 	void update(GAME_STATES::ProgramState& gameState)
 	{
+		float deltaTime = GetFrameTime();
+
 		mouse = GetMousePosition();
 
 		for (int i = 0; i < maxButtons; i++)
@@ -55,6 +58,16 @@ namespace GAME_OVER
 			}
 		}
 
+
+		if (Obstacle::actualSpeed > 0)
+		{
+			SPRITES::updateTexturesPos(deltaTime);
+			Obstacle::actualSpeed -= 20 * deltaTime;
+		}
+		else if (Obstacle::actualSpeed < 0)
+			Obstacle::actualSpeed = 0;
+
+
 		if (gameState.actual == GAME_STATES::Gamestate::REPLAY)
 		{
 			if (gameState.previus == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
@@ -64,12 +77,19 @@ namespace GAME_OVER
 
 			gameState.actual = gameState.previus;
 		}
+		else if (gameState.actual == GAME_STATES::Gamestate::MAIN_MENU)
+		{
+			GAMEPLAY_1P::initializeGame();
+			GAMEPLAY_2P::initializeGame();
+		}
 	}
 
 	void draw(Font font)
 	{
 		Vector2 gameOverTextSize = MeasureTextEx(font, "GAME OVER", BUTTON::titlesFontSize, 0);
 		Vector2 gameOverPos = { static_cast<float>(SCREEN_WIDTH) / 2 - gameOverTextSize.x / 2, static_cast<float>(SCREEN_HEIGHT) / 3 };
+
+		SPRITES::drawBackgroundAssets();
 
 		DrawTextEx(font, "GAME OVER", gameOverPos, BUTTON::titlesFontSize, 0, RED);
 

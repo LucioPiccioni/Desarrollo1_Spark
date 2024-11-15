@@ -1,6 +1,7 @@
 #include "main_menu.h"
 #include "button.h"
 #include "game_data.h"
+#include "sprites.h"
 
 namespace MAIN_MENU
 {
@@ -10,6 +11,7 @@ namespace MAIN_MENU
 
 	void initializeMenu()
 	{
+		SPRITES::spritesMovement = { 0,0,0,0 };
 		initializeButtons();
 	}
 
@@ -36,10 +38,14 @@ namespace MAIN_MENU
 				buttons[i].color = { 255, 182, 193, 255 };
 			}
 		}
+
+		SPRITES::updateTexturesPos(GetFrameTime());
 	}
 
 	void drawMenu()
 	{
+		SPRITES::drawBackgroundAssets();
+
 		DrawText("v0.4", 0, 0, 20, WHITE);
 
 		DrawTexturePro(
