@@ -6,12 +6,14 @@
 
 namespace PLAYER
 {
+	const int animationTotalFrames = 6;
+
 	void initializePlayer(Player& player, Texture2D& playerSheet)
 	{
 		player.pos = { SCREEN_WIDTH / 5, SCREEN_HEIGHT / 2 };
-		player.frameRec = { 0.0f, 0.0f, (float)playerSheet.width / 3, (float)playerSheet.height };
+		player.frameRec = { 0.0f, 0.0f, (float)playerSheet.width / animationTotalFrames, (float)playerSheet.height };
 		player.size = 64;
-		player.radius = player.size / 2;
+		player.radius = player.size * 0.5f;
 
 		player.jumpForce = -300;
 		player.gravityValue = 500;
@@ -37,6 +39,7 @@ namespace PLAYER
 	{
 		if (player.animate)
 		{
+			player.angle = 0;
 			player.framesCounter += deltaTime;
 
 			const float frameDuration = 0.12f;
@@ -46,13 +49,13 @@ namespace PLAYER
 				player.framesCounter -= frameDuration;
 				player.currentFrame++;
 
-				if (player.currentFrame > 2)
+				if (player.currentFrame > animationTotalFrames)
 				{
 					player.currentFrame = 0;
 					player.animate = false;
 				}
 
-				player.frameRec.x = static_cast<float>(player.currentFrame) * (playerSheet.width / 3.0f);
+				player.frameRec.x = static_cast<float>(player.currentFrame) * (playerSheet.width / animationTotalFrames);
 			}
 		}
 	}
@@ -61,20 +64,37 @@ namespace PLAYER
 	{
 		player.speed += player.gravityValue * deltaTime;
 		player.pos.y += player.speed * deltaTime;
+
+		if (player.speed < player.gravityValue && player.angle < 90)
+			player.angle += 100 * deltaTime;
 	}
 
-	void drawPlayer(Player player, Texture2D& playerSheet)
+	void drawPlayer(Player player, Texture2D& windEffect, Texture2D& playerSprite)
 	{
-		player.pos.x += playerSheet.width / 2;
-		player.pos.y += playerSheet.height / 2;
+		DrawCircle((int)player.pos.x, (int)player.pos.y, player.radius, RED);
+
+		if (player.animate)
+		{
+			Vector2 spriteRaltedPlayerPos = { player.pos.x + windEffect.width / 2, player.pos.y + windEffect.height / 2 };
+
+			DrawTexturePro(
+				windEffect,
+				player.frameRec,
+				Rectangle{ spriteRaltedPlayerPos.x - player.radius, spriteRaltedPlayerPos.y + player.radius, player.size, player.size },
+				Vector2{ static_cast<float>(windEffect.width) / 2, static_cast<float>(windEffect.height) / 2 },
+				0,
+				WHITE);
+		}
+
+		Vector2 spriteRaltedPlayerPos = { player.pos.x, player.pos.y};
+		player.frameRec = { 0,0, (float)playerSprite.width, (float)playerSprite.height };
 
 		DrawTexturePro(
-			playerSheet,
+			playerSprite,
 			player.frameRec,
-			Rectangle{ player.pos.x - player.size / 2, player.pos.y - player.size / 2, player.size, player.size },
-			Vector2{ static_cast<float>(playerSheet.width) / 2, static_cast<float>(playerSheet.height) / 2 },
-			0,
+			Rectangle{ player.pos.x, player.pos.y , player.size, player.size * 0.5f },
+			Vector2{ player.radius, player.radius * 0.5f },
+			player.angle,
 			WHITE);
 	}
-
 }

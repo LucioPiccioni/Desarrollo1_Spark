@@ -14,7 +14,8 @@ namespace SPRITES
 
 	struct Sprites
 	{
-		Texture2D playerSheet;
+		Texture2D playerSprite;
+		Texture2D windEffect;
 		Texture2D pipeImage;
 
 		Texture2D sky;

@@ -21,7 +21,7 @@ namespace GAMEPLAY_1P
 
 	void initializeGame()
 	{
-		initializePlayer(player, SPRITES::sprites.playerSheet);
+		initializePlayer(player, SPRITES::sprites.windEffect);
 		resetObstacles();
 	}
 
@@ -71,7 +71,7 @@ namespace GAMEPLAY_1P
 
 		SPRITES::drawBackgroundAssets();
 
-		drawPlayer(player, SPRITES::sprites.playerSheet);
+		drawPlayer(player, SPRITES::sprites.windEffect, SPRITES::sprites.playerSprite);
 
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
@@ -92,7 +92,7 @@ namespace GAMEPLAY_1P
 			movePlayerUp(player);
 		}
 
-		PLAYER::Anitmation(player, SPRITES::sprites.playerSheet, deltaTime);
+		PLAYER::Anitmation(player, SPRITES::sprites.windEffect, deltaTime);
 	}
 
 	void updateTexturesPos(float deltaTime)

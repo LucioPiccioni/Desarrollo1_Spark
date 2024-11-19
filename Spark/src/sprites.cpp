@@ -9,7 +9,8 @@ namespace SPRITES
 
 	void initSprites()
 	{
-		sprites.playerSheet = LoadTexture("res/birdSpriteSheet.png");
+		sprites.playerSprite = LoadTexture("res/Paper Plane.png");
+		sprites.windEffect = LoadTexture("res/Wind Effect2.png");
 		sprites.pipeImage = LoadTexture("res/pipe.png");
 
 		sprites.sky = LoadTexture("res/Paralax/evening sky.png");
@@ -20,7 +21,7 @@ namespace SPRITES
 
 	void unloadSprites()
 	{
-		UnloadTexture(sprites.playerSheet);
+		UnloadTexture(sprites.windEffect);
 		UnloadTexture(sprites.pipeImage);
 
 		UnloadTexture(sprites.backBuildings);

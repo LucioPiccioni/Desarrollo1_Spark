@@ -25,7 +25,7 @@ namespace GAMEPLAY_2P
 	{
 		for (int i = 0; i < maxPlayers; i++)
 		{
-			initializePlayer(player[i], SPRITES::sprites.playerSheet);
+			initializePlayer(player[i], SPRITES::sprites.windEffect);
 		}
 
 		resetObstacles();
@@ -83,7 +83,7 @@ namespace GAMEPLAY_2P
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
-			drawPlayer(player[i], SPRITES::sprites.playerSheet);
+			drawPlayer(player[i], SPRITES::sprites.windEffect, SPRITES::sprites.playerSprite);
 		}
 
 		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
@@ -119,7 +119,7 @@ namespace GAMEPLAY_2P
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
-			PLAYER::Anitmation(player[i], SPRITES::sprites.playerSheet, deltaTime);
+			PLAYER::Anitmation(player[i], SPRITES::sprites.playerSprite, deltaTime);
 		}
 	}
 

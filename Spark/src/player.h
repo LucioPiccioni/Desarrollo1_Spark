@@ -20,6 +20,8 @@ namespace PLAYER
 
 		float size = 0.0f;
 		float radius = 0.0f;
+		float angle = 0.0f;
+
 		float speed = 0.0f;
 
 		bool animate = false;
@@ -35,5 +37,5 @@ namespace PLAYER
 
 	void movePlayerDown(Player& player, float deltaTime);
 
-	void drawPlayer(Player player, Texture2D& playerSheet);
+	void drawPlayer(Player player, Texture2D& playerSheet, Texture2D& playerSprite);
 }
