@@ -68,7 +68,7 @@ To play the game, clone or download the repository from GitHub. Extract the game
 
 ## Contact
 
-Feel free to reach out if you have any questions or suggestions! You can contact me through my [Itch.io page](https://kapnack.itch.io) or via [Instagram](https://www.instagram.com/kapnack).
+Feel free to reach out if you have any questions or suggestions! You can contact me through my [Itch.io page](https://kapnack.itch.io) or via [Instagram](https://www.instagram.com/kapnack_/).
 
 ---
 
