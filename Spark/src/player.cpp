@@ -12,7 +12,7 @@ namespace PLAYER
 	void initializePlayer(Player& player, Texture2D& playerSheet)
 	{
 		player.pos = { SCREEN_WIDTH / 5, SCREEN_HEIGHT / 2 };
-		player.frameRec = { 0.0f, 0.0f, (float)playerSheet.width / animationTotalFrames, (float)playerSheet.height };
+		player.frameRec = { 0.0f, 0.0f, static_cast<float>(playerSheet.width) / animationTotalFrames, static_cast<float>(playerSheet.height) };
 		player.size = 64;
 		player.radius = player.size * 0.5f;
 
@@ -112,7 +112,7 @@ namespace PLAYER
 		}
 
 		Vector2 spriteRaltedPlayerPos = { player.pos.x, player.pos.y };
-		player.frameRec = { 0,0, (float)playerSprite.width, (float)playerSprite.height };
+		player.frameRec = { 0,0, static_cast<float>(playerSprite.width), static_cast<float>(playerSprite.height) };
 
 		DrawTexturePro(
 			playerSprite,

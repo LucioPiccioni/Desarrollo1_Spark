@@ -126,7 +126,7 @@ namespace GAMEPLAY_1P
 
 		SPRITES::drawFrontAssets();
 
-		DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
+		DrawText(text.c_str(), 0, 0, static_cast<int>(BUTTON::scoreFontSize), BLACK);
 	}
 
 	void updatePlayer(float deltaTime)

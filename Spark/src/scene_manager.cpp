@@ -46,7 +46,7 @@ namespace SCENE_MANAGER
 
 		InitAudioDevice();
 
-		font = LoadFontEx("res/Fonts/Lofi Lifestyle Demo.ttf", (int)BUTTON::titlesFontSize, 0, 0);
+		font = LoadFontEx("res/Fonts/Lofi Lifestyle Demo.ttf", static_cast<int>(BUTTON::titlesFontSize), 0, 0);
 
 		programState.actual = GAME_STATES::Gamestate::MAIN_MENU;
 		programState.previusGameMode = GAME_STATES::Gamestate::NONE;

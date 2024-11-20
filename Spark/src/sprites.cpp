@@ -66,7 +66,7 @@ namespace SPRITES
 	{
 		Vector2 origin = { 0.0f, 0.0f };
 
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.sky.width, (float)SPRITES::sprites.sky.height };
+		Rectangle sourceRec = { 0.0f, 0.0f, static_cast<float>(SPRITES::sprites.sky.width), static_cast<float>(SPRITES::sprites.sky.height) };
 
 		Rectangle destRec = { SPRITES::spritesMovement.sky, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
@@ -75,7 +75,7 @@ namespace SPRITES
 		DrawTexturePro(SPRITES::sprites.sky, sourceRec, destRec, origin, 0.0f, WHITE);
 
 
-		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.backBuildings.width, (float)SPRITES::sprites.backBuildings.height };
+		sourceRec = { 0.0f, 0.0f, static_cast<float>(SPRITES::sprites.backBuildings.width), static_cast<float>(SPRITES::sprites.backBuildings.height) };
 
 		destRec = { SPRITES::spritesMovement.backBuildings, 0, SCREEN_WIDTH, SCREEN_HEIGHT };
 		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
@@ -84,7 +84,7 @@ namespace SPRITES
 		DrawTexturePro(SPRITES::sprites.backBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
 
 
-		sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.frontBuildings.width, (float)SPRITES::sprites.frontBuildings.height };
+		sourceRec = { 0.0f, 0.0f, static_cast<float>(SPRITES::sprites.frontBuildings.width), static_cast<float>(SPRITES::sprites.frontBuildings.height) };
 
 		destRec = { SPRITES::spritesMovement.frontBuildings, 0.0f, SCREEN_WIDTH, SCREEN_HEIGHT };
 		DrawTexturePro(SPRITES::sprites.frontBuildings, sourceRec, destRec, origin, 0.0f, WHITE);
@@ -97,12 +97,12 @@ namespace SPRITES
 	{
 		Vector2 origin = { 0.0f, 0.0f };
 
-		Rectangle sourceRec = { 0.0f, 0.0f, (float)SPRITES::sprites.fence.width, (float)SPRITES::sprites.fence.height };
+		Rectangle sourceRec = { 0.0f, 0.0f, static_cast<float>(SPRITES::sprites.fence.width), static_cast<float>(SPRITES::sprites.fence.height) };
 
-		Rectangle destRec = { SPRITES::spritesMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		Rectangle destRec = { SPRITES::spritesMovement.fence, static_cast<float>(SCREEN_HEIGHT) - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, static_cast<float>(SPRITES::sprites.fence.height) * 2 };
 		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
 
-		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.fence, (float)SCREEN_HEIGHT - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, (float)SPRITES::sprites.fence.height * 2 };
+		destRec = { SCREEN_WIDTH + SPRITES::spritesMovement.fence, static_cast<float>(SCREEN_HEIGHT) - SPRITES::sprites.fence.height * 2, SCREEN_WIDTH * 2, static_cast<float>(SPRITES::sprites.fence.height) * 2 };
 		DrawTexturePro(SPRITES::sprites.fence, sourceRec, destRec, origin, 0.0f, WHITE);
 	}
 }

@@ -141,7 +141,7 @@ namespace GAMEPLAY_2P
 
 
 		std::string text = "Points: " + std::to_string(player[0].points) + ".";
-		DrawText(text.c_str(), 0, 0, (int)BUTTON::scoreFontSize, BLACK);
+		DrawText(text.c_str(), 0, 0, static_cast<int>(BUTTON::scoreFontSize), BLACK);
 
 	}
 
