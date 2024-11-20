@@ -54,7 +54,7 @@ namespace MAIN_MENU
 
 		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
 
-		DrawText("v0.4", 0, 0, 20, WHITE);
+		DrawText("v0.5", 0, 0, 20, WHITE);
 
 		DrawTextPro(font, 
 			"The Spark", 
