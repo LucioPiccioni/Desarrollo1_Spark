@@ -1,6 +1,6 @@
-#include "sprites.h"
-#include "obstacle.h"
-#include "game_data.h"
+#include "Gameplay/sprites.h"
+#include "Gameplay/obstacle.h"
+#include "Engine/game_data.h"
 
 namespace SPRITES
 {

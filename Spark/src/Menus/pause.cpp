@@ -1,10 +1,10 @@
 #include "pause.h"
 
-#include "sounds.h"
-#include "game_data.h"
-#include "gameplay.h"
-#include "button.h"
-#include "gameplay2p.h"
+#include "Engine/sounds.h"
+#include "Engine/game_data.h"
+#include "GamePlay/gameplay.h"
+#include "Menus/button.h"
+#include "Gameplay/gameplay2p.h"
 
 namespace PAUSE
 {
@@ -39,6 +39,9 @@ namespace PAUSE
 	void update(GAME_STATES::ProgramState& gameState)
 	{
 		mouse = GetMousePosition();
+
+		if (IsKeyPressed(KEY_ESCAPE))
+			gameState.actual = gameState.previusGameMode;
 
 		for (int i = 0; i < buttonCount; i++)
 		{

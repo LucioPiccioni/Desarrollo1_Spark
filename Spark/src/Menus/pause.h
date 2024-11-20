@@ -2,8 +2,8 @@
 
 #include "raylib.h"
 
-#include "gameplay.h"
-#include "state_machine.h"
+#include "Gameplay/gameplay.h"
+#include "Engine/state_machine.h"
 
 namespace PAUSE
 {

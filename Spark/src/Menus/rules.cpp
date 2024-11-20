@@ -2,10 +2,10 @@
 
 #include "raylib.h"
 
-#include "game_data.h"
-#include "button.h"
-#include "sounds.h"
-#include "sprites.h"
+#include "Engine/game_data.h"
+#include "Menus/button.h"
+#include "Engine/sounds.h"
+#include "Gameplay/sprites.h"
 
 namespace RULES_MENU
 {

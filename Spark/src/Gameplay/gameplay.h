@@ -2,9 +2,9 @@
 
 #include "raylib.h"
 
-#include "sprites.h"
-#include "state_machine.h"
-#include "player.h"
+#include "Gameplay/sprites.h"
+#include "Engine/state_machine.h"
+#include "Gameplay/player.h"
 
 namespace GAMEPLAY_1P
 {

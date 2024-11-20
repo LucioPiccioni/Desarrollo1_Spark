@@ -4,15 +4,15 @@
 
 #include "raylib.h"
 
-#include "scene_manager.h"
-#include "Button.h"
+#include "Engine/scene_manager.h"
+#include "Menus/Button.h"
 
-#include "obstacle.h"
-#include "state_machine.h"
-#include "game_data.h"
+#include "Gameplay/obstacle.h"
+#include "Engine/state_machine.h"
+#include "Engine/game_data.h"
 
-#include "sprites.h"
-#include "sounds.h"
+#include "Gameplay/sprites.h"
+#include "Engine/sounds.h"
 
 namespace GAMEPLAY_2P
 {

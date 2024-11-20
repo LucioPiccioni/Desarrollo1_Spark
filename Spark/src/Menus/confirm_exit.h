@@ -1,9 +1,9 @@
-#pragma once
-
-#include "state_machine.h"
 #include "raylib.h"
 
-namespace GAME_OVER
+#include "Engine/state_machine.h"
+#include "Engine/game_data.h"
+
+namespace CONFIRM_EXIT
 {
 	void initButtons();
 

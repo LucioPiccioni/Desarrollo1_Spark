@@ -2,10 +2,10 @@
 
 #include "raylib.h"
 
-#include "game_data.h"
-#include "sounds.h"
-#include "sprites.h"
-#include "button.h"
+#include "Engine/game_data.h"
+#include "Engine/sounds.h"
+#include "Gameplay/sprites.h"
+#include "Menus/button.h"
 
 namespace CREDITS_MENU
 {

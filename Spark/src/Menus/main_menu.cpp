@@ -1,10 +1,10 @@
 #include "main_menu.h"
 
-#include "sounds.h"
-#include "music.h"
-#include "button.h"
-#include "game_data.h"
-#include "sprites.h"
+#include "Engine/sounds.h"
+#include "Engine/music.h"
+#include "Menus/button.h"
+#include "Engine/game_data.h"
+#include "Gameplay/sprites.h"
 
 namespace MAIN_MENU
 {
