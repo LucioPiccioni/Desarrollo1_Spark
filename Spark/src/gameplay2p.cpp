@@ -5,11 +5,14 @@
 #include "raylib.h"
 
 #include "scene_manager.h"
-#include "obstacle.h"
 #include "Button.h"
+
+#include "obstacle.h"
 #include "state_machine.h"
 #include "game_data.h"
+
 #include "sprites.h"
+#include "sounds.h"
 
 namespace GAMEPLAY_2P
 {
@@ -17,7 +20,7 @@ namespace GAMEPLAY_2P
 
 	PLAYER::Player player[maxPlayers];
 
-	std::list<Obstacle::Obstacle> obstacles;
+	std::list<OBSTACLE::Obstacle> obstacles;
 
 	bool shouldReset = 0;
 
@@ -28,6 +31,9 @@ namespace GAMEPLAY_2P
 			initializePlayer(player[i], SPRITES::sprites.windEffect);
 		}
 
+		player[0].color = PURPLE;
+		player[1].color = SKYBLUE;
+
 		resetObstacles();
 	}
 
@@ -35,9 +41,9 @@ namespace GAMEPLAY_2P
 	{
 		SPRITES::spritesMovement = { 0,0,0,0 };
 		obstacles.clear();
-		Obstacle::actualSpacing = Obstacle::maxSpacing;
-		Obstacle::actualSpeed = Obstacle::minSpeed;
-		Obstacle::spawnTimer = 0;
+		OBSTACLE::actualSpacing = OBSTACLE::maxSpacing;
+		OBSTACLE::actualSpeed = OBSTACLE::minSpeed;
+		OBSTACLE::spawnTimer = 0;
 	}
 
 	void updateGame(GAME_STATES::ProgramState& gameState)
@@ -51,29 +57,37 @@ namespace GAMEPLAY_2P
 
 		SPRITES::updateTexturesPos(deltaTime);
 
-		if (Obstacle::spawnTimer <= 0)
+		if (OBSTACLE::spawnTimer <= 0)
 		{
-			obstacles.push_back(Obstacle::Creator());
-			Obstacle::spawnTimer = 6;
+			obstacles.push_back(OBSTACLE::Creator());
+			OBSTACLE::spawnTimer = 6;
 		}
 		else
-			Obstacle::spawnTimer -= deltaTime;
+			OBSTACLE::spawnTimer -= deltaTime;
 
-		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
+		for (std::list<OBSTACLE::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
-			Obstacle::updateObstacle(*it, deltaTime);
+			OBSTACLE::updateObstacle(*it, deltaTime);
 		}
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
 			if (AddPoint(player[i].pos))
+			{
+				StopSound(SOUNDS::gameSounds.point);
+				PlaySound(SOUNDS::gameSounds.point);
 				player[i].points++;
+			}
 		}
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
 			if (DidPlayerDied(player[i].pos, player[i].radius))
+			{
+				StopSound(SOUNDS::gameSounds.die);
+				PlaySound(SOUNDS::gameSounds.die);
 				gameState.actual = GAME_STATES::Gamestate::GAME_OVER;
+			}
 		}
 	}
 
@@ -86,9 +100,9 @@ namespace GAMEPLAY_2P
 			drawPlayer(player[i], SPRITES::sprites.windEffect, SPRITES::sprites.playerSprite);
 		}
 
-		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
+		for (std::list<OBSTACLE::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
-			Obstacle::drawObstacle(*it, SPRITES::sprites.pipeImage);
+			OBSTACLE::drawObstacle(*it, SPRITES::sprites.pipeImage);
 		}
 
 		SPRITES::drawFrontAssets();
@@ -104,28 +118,31 @@ namespace GAMEPLAY_2P
 
 		if (IsKeyPressed(KEY_W))
 		{
+			StopSound(SOUNDS::gameSounds.jump);
+			PlaySound(SOUNDS::gameSounds.jump);
 			movePlayerUp(player[0]);
 		}
 
 		if (IsKeyPressed(KEY_UP))
 		{
+			StopSound(SOUNDS::gameSounds.jump);
+			PlaySound(SOUNDS::gameSounds.jump);
 			movePlayerUp(player[1]);
 		}
 
 		for (int i = 0; i < maxPlayers; i++)
 		{
 			movePlayerDown(player[i], deltaTime);
+
+			PLAYER::moveAngleUp(player[i], deltaTime);
+			PLAYER::Anitmation(player[i], SPRITES::sprites.windEffect, deltaTime);
 		}
 
-		for (int i = 0; i < maxPlayers; i++)
-		{
-			PLAYER::Anitmation(player[i], SPRITES::sprites.playerSprite, deltaTime);
-		}
 	}
 
 	bool AddPoint(Vector2 pos)
 	{
-		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
+		for (std::list<OBSTACLE::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
 			if (!it->counted && pos.x > it->top.rect.x)
 			{
@@ -143,7 +160,7 @@ namespace GAMEPLAY_2P
 			return true;
 
 
-		for (std::list<Obstacle::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
+		for (std::list<OBSTACLE::Obstacle>::iterator it = obstacles.begin(); it != obstacles.end(); it++)
 		{
 			float closestX = std::max(it->top.rect.x, std::min(pos.x, it->top.rect.x + it->top.rect.width));
 			float closestY = std::max(it->top.rect.y, std::min(pos.y, it->top.rect.y + it->top.rect.height));

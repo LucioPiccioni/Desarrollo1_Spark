@@ -1,9 +1,10 @@
 #include "pause.h"
 
+#include "sounds.h"
 #include "game_data.h"
 #include "gameplay.h"
 #include "button.h"
-#include <gameplay2p.h>
+#include "gameplay2p.h"
 
 namespace PAUSE
 {
@@ -52,6 +53,8 @@ namespace PAUSE
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
 				{
+					StopSound(SOUNDS::gameSounds.button);
+					PlaySound(SOUNDS::gameSounds.button);
 					gameState.actual = buttons[i].option;
 				}
 			}
@@ -63,14 +66,14 @@ namespace PAUSE
 
 		if (gameState.actual == GAME_STATES::Gamestate::MAIN_MENU)
 		{
-			if (gameState.previus == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
+			if (gameState.previusGameMode == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
 				GAMEPLAY_1P::initializeGame();
 			else
 				GAMEPLAY_2P::initializeGame();
 		}
 	}
 
-	void draw(Font font)
+	void draw(Font font, GAME_STATES::Gamestate previusGameMode)
 	{
 		Vector2 titlePos =
 		{
@@ -80,12 +83,18 @@ namespace PAUSE
 
 		Color pastelPurple = { 214, 196, 224, 255 };
 
+		if (previusGameMode == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
+			GAMEPLAY_1P::drawGame();
+		else
+			GAMEPLAY_2P::drawGame();
+
+		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
 
 		DrawTextEx(font, "Pause", titlePos, BUTTON::titlesFontSize, 2, pastelPurple);
 
 		for (int i = 0; i < buttonCount; i++)
 		{
-			BUTTON::drawButton(buttons[i], GetFontDefault());
+			BUTTON::drawButton(buttons[i], font);
 		}
 	}
 }

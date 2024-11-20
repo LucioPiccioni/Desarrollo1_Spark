@@ -1,4 +1,6 @@
 #include "main_menu.h"
+
+#include "sounds.h"
 #include "button.h"
 #include "game_data.h"
 #include "sprites.h"
@@ -31,7 +33,11 @@ namespace MAIN_MENU
 				}
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					StopSound(SOUNDS::gameSounds.button);
+					PlaySound(SOUNDS::gameSounds.button);
 					gameState.actual = buttons[i].option;
+				}
 			}
 			else
 			{
@@ -42,27 +48,26 @@ namespace MAIN_MENU
 		SPRITES::updateTexturesPos(GetFrameTime());
 	}
 
-	void drawMenu()
+	void drawMenu(Font font)
 	{
 		SPRITES::drawBackgroundAssets();
 
+		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
+
 		DrawText("v0.4", 0, 0, 20, WHITE);
 
-		DrawTexturePro(
-			gamesTitle,
-			Rectangle{ 0, 0, static_cast<float>(gamesTitle.width), static_cast<float>(gamesTitle.height) },  // Fuente: toda la imagen original
-			Rectangle{ static_cast<float>(SCREEN_WIDTH) / 2 - gamesTitle.width / 2,  // Posición X centrada
-					   static_cast<float>(SCREEN_HEIGHT) / 3 - gamesTitle.height / 2,  // Posición Y centrada
-					   static_cast<float>(gamesTitle.width),  // Ancho del título
-					   static_cast<float>(gamesTitle.height) },  // Altura del título
-			Vector2{ 0, 0 },  // Offset del centro
-			0.0f,  // Sin rotación
-			WHITE  // Sin tintes de color
-		);
+		DrawTextPro(font, 
+			"The Spark", 
+			Vector2{ (SCREEN_WIDTH - MeasureTextEx(font, "The Spark", BUTTON::titlesFontSize, 0).x) * 0.5f, 
+					 MeasureTextEx(font, "The Spark", BUTTON::titlesFontSize, 0).y * 0.5f },
+			Vector2{0, 0},
+			0, BUTTON::titlesFontSize,
+			0, 
+			YELLOW);
 
 		for (int i = 0; i < maxButtons; i++)
 		{
-			BUTTON::drawButton(buttons[i], GetFontDefault());
+			BUTTON::drawButton(buttons[i], font);
 		}
 	}
 
@@ -80,11 +85,11 @@ namespace MAIN_MENU
 		buttons[0].option = GAME_STATES::Gamestate::ONE_PLAYER_MODE;
 		buttons[1].option = GAME_STATES::Gamestate::TWO_PLAYER_MODE;
 		buttons[2].option = GAME_STATES::Gamestate::MAIN_MENU;
-		buttons[3].option = GAME_STATES::Gamestate::MAIN_MENU;
-		buttons[4].option = GAME_STATES::Gamestate::EXIT;
+		buttons[3].option = GAME_STATES::Gamestate::CREDITS;
+		buttons[4].option = GAME_STATES::Gamestate::WANT_TO_EXIT;
 
-		buttons[0].text = "1P MODE";
-		buttons[1].text = "2P MODE";
+		buttons[0].text = "Solo MODE";
+		buttons[1].text = "Coop MODE";
 		buttons[2].text = "RULES";
 		buttons[3].text = "CREDITS";
 		buttons[4].text = "EXIT";

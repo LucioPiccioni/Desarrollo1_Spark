@@ -4,7 +4,7 @@
 
 #include "game_data.h"
 
-namespace Obstacle
+namespace OBSTACLE
 {
 	float actualSpeed = minSpeed;
 
@@ -48,9 +48,6 @@ namespace Obstacle
 
 	void drawObstacle(Obstacle obstacle, Texture2D& pipeTexture)
 	{
-		DrawRectangleRec(obstacle.top.rect, GREEN);
-		DrawRectangleRec(obstacle.bottom.rect, RED);
-
 		obstacle.top.rect.x += obstacle.top.rect.width / 2;
 		obstacle.top.rect.y += obstacle.top.rect.height / 2;
 

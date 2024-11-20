@@ -11,5 +11,5 @@ namespace PAUSE
 
 	void update(GAME_STATES::ProgramState& gameState);
 
-	void draw(Font font);
+	void draw(Font font, GAME_STATES::Gamestate previusGameMode);
 }

@@ -4,7 +4,7 @@
 
 #include "raylib.h"
 
-namespace Obstacle
+namespace OBSTACLE
 {
 	extern float spawnTimer;
 

@@ -31,10 +31,10 @@ namespace SPRITES
 
 	void updateTexturesPos(float deltaTime)
 	{
-		float skySpeed = (Obstacle::actualSpeed * 0.05f) * deltaTime;
-		float backBuildingSpeed = (Obstacle::actualSpeed - 90) * deltaTime;
-		float frontBuildingSpeed = (Obstacle::actualSpeed - 50) * deltaTime;
-		float fenceSpeed = (Obstacle::actualSpeed + 100) * deltaTime;
+		float skySpeed = (OBSTACLE::actualSpeed * 0.05f) * deltaTime;
+		float backBuildingSpeed = (OBSTACLE::actualSpeed - 90) * deltaTime;
+		float frontBuildingSpeed = (OBSTACLE::actualSpeed - 50) * deltaTime;
+		float fenceSpeed = (OBSTACLE::actualSpeed + 100) * deltaTime;
 
 		if (skySpeed > 0)
 			SPRITES::spritesMovement.sky -= skySpeed;

@@ -10,6 +10,8 @@ namespace PLAYER
 
 		Rectangle frameRec = {};
 
+		Color color = WHITE;
+
 		int currentFrame = 0;
 		float framesCounter = 0.0f;
 
@@ -25,6 +27,7 @@ namespace PLAYER
 		float speed = 0.0f;
 
 		bool animate = false;
+		bool upwardsAngle = false;
 	};
 
 	void initializePlayer(Player& player, Texture2D& playerSheet);
@@ -32,6 +35,8 @@ namespace PLAYER
 	void resetPlayer(Player& player);
 
 	void movePlayerUp(Player& player);
+
+	void moveAngleUp(Player& player, float deltaTime);
 
 	void Anitmation(Player& player, Texture2D& playerSheet, float deltaTime);
 

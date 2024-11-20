@@ -26,7 +26,8 @@ namespace GAME_STATES
 	struct ProgramState
 	{
 		Gamestate actual = Gamestate::MAIN_MENU;
-		Gamestate previus = Gamestate::MAIN_MENU;
+		Gamestate previusGameMode = Gamestate::MAIN_MENU;
+		Gamestate previusHud = Gamestate::MAIN_MENU;
 	};
 }
 

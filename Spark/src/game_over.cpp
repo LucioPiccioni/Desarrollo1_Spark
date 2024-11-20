@@ -4,6 +4,7 @@
 #include "gameplay2p.h"
 #include "obstacle.h"
 
+#include "sounds.h"
 #include "button.h"
 #include "game_data.h"
 
@@ -25,7 +26,7 @@ namespace GAME_OVER
 
 		buttons[0].option = GAME_STATES::Gamestate::REPLAY;
 		buttons[1].option = GAME_STATES::Gamestate::MAIN_MENU;
-		buttons[2].option = GAME_STATES::Gamestate::EXIT;
+		buttons[2].option = GAME_STATES::Gamestate::WANT_TO_EXIT;
 
 		buttons[0].text = "REPLAY";
 		buttons[1].text = "MENU";
@@ -50,7 +51,11 @@ namespace GAME_OVER
 				}
 
 				if (IsMouseButtonReleased(MOUSE_LEFT_BUTTON))
+				{
+					StopSound(SOUNDS::gameSounds.button);
+					PlaySound(SOUNDS::gameSounds.button);
 					gameState.actual = buttons[i].option;
+				}
 			}
 			else
 			{
@@ -59,23 +64,23 @@ namespace GAME_OVER
 		}
 
 
-		if (Obstacle::actualSpeed > 0)
+		if (OBSTACLE::actualSpeed > 0)
 		{
 			SPRITES::updateTexturesPos(deltaTime);
-			Obstacle::actualSpeed -= 20 * deltaTime;
+			OBSTACLE::actualSpeed -= 20 * deltaTime;
 		}
-		else if (Obstacle::actualSpeed < 0)
-			Obstacle::actualSpeed = 0;
+		else if (OBSTACLE::actualSpeed < 0)
+			OBSTACLE::actualSpeed = 0;
 
 
 		if (gameState.actual == GAME_STATES::Gamestate::REPLAY)
 		{
-			if (gameState.previus == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
+			if (gameState.previusGameMode == GAME_STATES::Gamestate::ONE_PLAYER_MODE)
 				GAMEPLAY_1P::initializeGame();
 			else
 				GAMEPLAY_2P::initializeGame();
 
-			gameState.actual = gameState.previus;
+			gameState.actual = gameState.previusGameMode;
 		}
 		else if (gameState.actual == GAME_STATES::Gamestate::MAIN_MENU)
 		{
@@ -87,15 +92,17 @@ namespace GAME_OVER
 	void draw(Font font)
 	{
 		Vector2 gameOverTextSize = MeasureTextEx(font, "GAME OVER", BUTTON::titlesFontSize, 0);
-		Vector2 gameOverPos = { static_cast<float>(SCREEN_WIDTH) / 2 - gameOverTextSize.x / 2, static_cast<float>(SCREEN_HEIGHT) / 3 };
+		Vector2 gameOverPos = { (static_cast<float>(SCREEN_WIDTH) - gameOverTextSize.x) * 0.5f, gameOverTextSize.y };
 
 		SPRITES::drawBackgroundAssets();
+
+		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
 
 		DrawTextEx(font, "GAME OVER", gameOverPos, BUTTON::titlesFontSize, 0, RED);
 
 		for (int i = 0; i < maxButtons; i++)
 		{
-			BUTTON::drawButton(buttons[i], GetFontDefault());
+			BUTTON::drawButton(buttons[i], font);
 		}
 	}
 }
