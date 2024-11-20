@@ -81,6 +81,29 @@ namespace CREDITS_MENU
 
 	}
 
+	void drawCreditButton(Rectangle rect, const char* text, Font font, Color color, Color outline, float fontSize)
+	{
+		DrawRectangleRec(rect, color);
+		DrawRectangleLinesEx(rect, 2, outline);
+
+		Vector2 textSize = MeasureTextEx(font, text, fontSize, 1);
+
+		Vector2 textPosition = {
+			rect.x + (rect.width - textSize.x) / 2,
+			rect.y + (rect.height - textSize.y) / 2
+		};
+
+		DrawTextPro(font,
+			text,
+			textPosition,
+			Vector2{ 0, 0 },
+			0,
+			fontSize,
+			1,
+			BLACK);
+	}
+
+
 	void drawCreditsMenu(Font font)
 	{
 		SPRITES::drawBackgroundAssets();
@@ -97,7 +120,7 @@ namespace CREDITS_MENU
 			WHITE);
 
 		Vector2 myButton =
-			Vector2{ (SCREEN_WIDTH - MeasureTextEx(font, "Developed by: Lucio Piccioni", BUTTON::textFontSize, 0).x) * 0.5f,
+			Vector2{ (SCREEN_WIDTH - BUTTON::buttonWidth) * 0.5f,
 			MeasureTextEx(font, "Developed by: Lucio Piccioni", BUTTON::textFontSize, 0).y * 2 };
 
 		float startX = 100;
@@ -108,18 +131,20 @@ namespace CREDITS_MENU
 
 		for (int i = 0; i < maxCredits; i++)
 		{
-			DrawTextPro(font, credits[i].text, Vector2{ startX, startY + i * (30 + spacing) }, Vector2{ 0, 0 }, 0, BUTTON::textFontSize * 0.70, 0, WHITE);
-
-			DrawRectangleRec(credits[i].buttonRect, DARKGRAY);
-
-			DrawTextPro(font,
-				"Link",
-				Vector2{ credits[i].buttonRect.x + 30.0f, credits[i].buttonRect.y + 5.0f },
-				Vector2{ 0,0 },
-				0,
-				BUTTON::scoreFontSize,
-				0,
+			DrawTextPro(font, credits[i].text, 
+				Vector2{ startX, startY + i * (30 + spacing) }, 
+				Vector2{ 0, 0 }, 0, BUTTON::textFontSize * 0.70,
+				0, 
 				WHITE);
+
+			drawCreditButton(
+				credits[i].buttonRect,
+				"Link",
+				font,
+				PURPLE,
+				WHITE,
+				BUTTON::scoreFontSize
+			);
 		}
 
 		BUTTON::drawButton(button, font);

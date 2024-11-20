@@ -4,15 +4,6 @@
 
 namespace BUTTON
 {
-	Button createButton(Vector2 position, Vector2 size, const char* text)
-	{
-		Button button;
-		button.rect = { position.x, position.y, size.x, size.y };
-		button.text = text;
-		button.color = LIGHTGRAY;
-		return button;
-	}
-
 	void drawButton(Button button, Font font)
 	{
 		DrawRectangleRec(button.rect, button.color);

@@ -28,7 +28,6 @@ namespace BUTTON
 	const float textFontSize = 40;
 	const float scoreFontSize = 30;
 
-	Button createButton(Vector2 position, Vector2 size, const char* text);
 	void drawButton(Button button, Font font);
 	bool isButtonClicked(Vector2 mouse, Button button);
 }
