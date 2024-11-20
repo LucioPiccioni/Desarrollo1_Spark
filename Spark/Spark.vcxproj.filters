@@ -28,61 +28,70 @@
     <Filter Include="Resource Files\Engine">
       <UniqueIdentifier>{5f839675-2b6e-4f40-852a-281df21efa40}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource Files\Gameplay">
+      <UniqueIdentifier>{054a6bc8-4803-4b18-b993-43e30eda306b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Menus">
+      <UniqueIdentifier>{48431795-84a6-4d7f-b6e8-3808d9945877}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource Files\Gameplay\Entities">
+      <UniqueIdentifier>{6a049b6b-eb26-4724-9499-9cc7d45d23e1}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\state_machine.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game_data.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gameplay.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
     <ClCompile Include="src\main.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\main_menu.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\obstacle.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\player.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\scene_manager.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\button.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sprites.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\game_over.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\pause.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\gameplay2p.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
     <ClCompile Include="src\music.cpp">
       <Filter>Resource Files\Engine</Filter>
     </ClCompile>
     <ClCompile Include="src\confirm_exit.cpp">
-      <Filter>Resource Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\sounds.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="src\credits.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\button.cpp">
+      <Filter>Resource Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_data.cpp">
+      <Filter>Resource Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\game_over.cpp">
+      <Filter>Resource Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameplay.cpp">
+      <Filter>Resource Files\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\gameplay2p.cpp">
+      <Filter>Resource Files\Gameplay</Filter>
+    </ClCompile>
+    <ClCompile Include="src\main_menu.cpp">
+      <Filter>Resource Files\Menus</Filter>
     </ClCompile>
     <ClCompile Include="src\rules.cpp">
-      <Filter>Resource Files</Filter>
+      <Filter>Resource Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sounds.cpp">
+      <Filter>Resource Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\state_machine.cpp">
+      <Filter>Resource Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\player.cpp">
+      <Filter>Resource Files\Gameplay\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\obstacle.cpp">
+      <Filter>Resource Files\Gameplay\Entities</Filter>
+    </ClCompile>
+    <ClCompile Include="src\pause.cpp">
+      <Filter>Resource Files\Menus</Filter>
+    </ClCompile>
+    <ClCompile Include="src\scene_manager.cpp">
+      <Filter>Resource Files\Engine</Filter>
+    </ClCompile>
+    <ClCompile Include="src\sprites.cpp">
+      <Filter>Resource Files\Gameplay</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
