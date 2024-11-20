@@ -12,6 +12,7 @@
 #include "player.h"
 
 #include "main_menu.h"
+#include "rules.h"
 #include "gameplay.h"
 #include "gameplay2p.h"
 #include "credits.h"
@@ -52,6 +53,7 @@ namespace SCENE_MANAGER
 		programState.previusHud = GAME_STATES::Gamestate::NONE;
 
 		MAIN_MENU::initializeMenu();
+		RULES_MENU::initializeRulesMenu();
 		SPRITES::initSprites();
 		SOUNDS::init();
 		SOUND_TRACKS::init();
@@ -104,6 +106,7 @@ namespace SCENE_MANAGER
 
 		case GAME_STATES::Gamestate::RULES:
 
+			RULES_MENU::updateRulesMenu(programState.actual);
 			break;
 
 		case GAME_STATES::Gamestate::CREDITS:
@@ -150,6 +153,7 @@ namespace SCENE_MANAGER
 			break;
 
 		case GAME_STATES::Gamestate::RULES:
+			RULES_MENU::drawRulesMenu(font);
 			break;
 
 		case GAME_STATES::Gamestate::CREDITS:

@@ -84,7 +84,7 @@ namespace MAIN_MENU
 
 		buttons[0].option = GAME_STATES::Gamestate::ONE_PLAYER_MODE;
 		buttons[1].option = GAME_STATES::Gamestate::TWO_PLAYER_MODE;
-		buttons[2].option = GAME_STATES::Gamestate::MAIN_MENU;
+		buttons[2].option = GAME_STATES::Gamestate::RULES;
 		buttons[3].option = GAME_STATES::Gamestate::CREDITS;
 		buttons[4].option = GAME_STATES::Gamestate::WANT_TO_EXIT;
 

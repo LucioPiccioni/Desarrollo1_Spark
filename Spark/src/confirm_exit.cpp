@@ -92,15 +92,13 @@ namespace CONFIRM_EXIT
 
 	void draw(Font font)
 	{
-		Color outline = BLACK;
-
 		SPRITES::drawBackgroundAssets();
 
-		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
+		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 225 });
 
 		DrawTextEx(font, "Are you sure you want to exit?",
 			Vector2{ static_cast<float>(SCREEN_WIDTH) / 2 - MeasureTextEx(font, "Are you sure you want to exit?", BUTTON::textFontSize, 0).x / 2, static_cast<float>(SCREEN_HEIGHT / 4) },
-			BUTTON::textFontSize, 0, outline);
+			BUTTON::textFontSize, 0, RED);
 
 		for (int i = 0; i < maxButtons; i++)
 		{

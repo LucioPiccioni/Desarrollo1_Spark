@@ -81,6 +81,9 @@
     <ClCompile Include="src\credits.cpp">
       <Filter>Resource Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\rules.cpp">
+      <Filter>Resource Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\gameplay.h">
@@ -129,6 +132,9 @@
       <Filter>Header Files\Engine</Filter>
     </ClInclude>
     <ClInclude Include="src\credits.h">
+      <Filter>Header Files\Menus</Filter>
+    </ClInclude>
+    <ClInclude Include="src\rules.h">
       <Filter>Header Files\Menus</Filter>
     </ClInclude>
   </ItemGroup>

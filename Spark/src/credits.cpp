@@ -78,7 +78,6 @@ namespace CREDITS_MENU
 		{
 			button.color = { 255, 182, 193, 255 };
 		}
-
 	}
 
 	void drawCreditButton(Rectangle rect, const char* text, Font font, Color color, Color outline, float fontSize)
