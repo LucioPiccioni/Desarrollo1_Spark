@@ -1,6 +1,7 @@
 #include "main_menu.h"
 
 #include "sounds.h"
+#include "music.h"
 #include "button.h"
 #include "game_data.h"
 #include "sprites.h"
@@ -20,6 +21,11 @@ namespace MAIN_MENU
 	void updateMenu(GAME_STATES::ProgramState& gameState)
 	{
 		Vector2 mouse = GetMousePosition();
+
+		if ((IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_LEFT)) && SOUND_TRACKS::volume > 0)
+			SOUND_TRACKS::volume -= 0.1f;
+		else if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_RIGHT)) && SOUND_TRACKS::volume < 1)
+			SOUND_TRACKS::volume += 0.1f;
 
 		for (int i = 0; i < maxButtons; i++)
 		{
@@ -56,20 +62,27 @@ namespace MAIN_MENU
 
 		DrawText("v0.5", 0, 0, 20, WHITE);
 
-		DrawTextPro(font, 
-			"The Spark", 
-			Vector2{ (SCREEN_WIDTH - MeasureTextEx(font, "The Spark", BUTTON::titlesFontSize, 0).x) * 0.5f, 
+		DrawTextPro(font,
+			"The Spark",
+			Vector2{ (SCREEN_WIDTH - MeasureTextEx(font, "The Spark", BUTTON::titlesFontSize, 0).x) * 0.5f,
 					 MeasureTextEx(font, "The Spark", BUTTON::titlesFontSize, 0).y * 0.5f },
-			Vector2{0, 0},
+			Vector2{ 0, 0 },
 			0, BUTTON::titlesFontSize,
-			0, 
+			0,
 			YELLOW);
 
 		for (int i = 0; i < maxButtons; i++)
 		{
 			BUTTON::drawButton(buttons[i], font);
 		}
+
+		DrawText("Hold Left/Down to lower volume,", 10, SCREEN_HEIGHT - 60, 14, WHITE);
+		DrawText("Right/Up to increase volume", 10, SCREEN_HEIGHT - 40, 14, WHITE);
+
+		int volumePercentage = static_cast<int>(SOUND_TRACKS::volume * 100);
+		DrawText(("Volume: " + std::to_string(volumePercentage) + "%").c_str(), 10, SCREEN_HEIGHT - 20, 14, WHITE);
 	}
+
 
 	void initializeButtons()
 	{
