@@ -16,6 +16,8 @@
 
 namespace GAMEPLAY_1P
 {
+	const int pointsPerDifficultyIncrease = 3;
+
 	PLAYER::Player player;
 
 	std::list<OBSTACLE::Obstacle> obstacles;
@@ -34,6 +36,7 @@ namespace GAMEPLAY_1P
 		obstacles.clear();
 		OBSTACLE::actualSpacing = OBSTACLE::maxSpacing;
 		OBSTACLE::actualSpeed = OBSTACLE::minSpeed;
+		OBSTACLE::actualSpawiningTime = OBSTACLE::maxSpawiningTime;
 		OBSTACLE::spawnTimer = 0;
 	}
 
@@ -51,7 +54,7 @@ namespace GAMEPLAY_1P
 		if (OBSTACLE::spawnTimer <= 0)
 		{
 			obstacles.push_back(OBSTACLE::Creator());
-			OBSTACLE::spawnTimer = 6;
+			OBSTACLE::spawnTimer = OBSTACLE::actualSpawiningTime;
 		}
 		else
 			OBSTACLE::spawnTimer -= deltaTime;
@@ -66,13 +69,45 @@ namespace GAMEPLAY_1P
 			StopSound(SOUNDS::gameSounds.point);
 			PlaySound(SOUNDS::gameSounds.point);
 			player.points++;
+			player.EXP++;
 		}
+
+		increaseDifficulty();
 
 		if (DidPlayerDied())
 		{
 			StopSound(SOUNDS::gameSounds.die);
 			PlaySound(SOUNDS::gameSounds.die);
 			gameState.actual = GAME_STATES::Gamestate::GAME_OVER;
+		}
+	}
+
+	void increaseDifficulty()
+	{
+		if (player.EXP == pointsPerDifficultyIncrease)
+		{
+			player.incrisingDificulty = true;
+			player.EXP = 0;
+		}
+
+		if (player.incrisingDificulty)
+		{
+			if (OBSTACLE::actualSpeed < OBSTACLE::maxSpeed)
+			{
+				OBSTACLE::actualSpeed += OBSTACLE::actualSpeed * 0.15f;
+			}
+
+			if (OBSTACLE::actualSpacing > OBSTACLE::minSpacing)
+			{
+				OBSTACLE::actualSpacing -= OBSTACLE::actualSpacing * 0.10f;
+			}
+
+			if (OBSTACLE::actualSpawiningTime > OBSTACLE::minSpawiningTime)
+			{
+				OBSTACLE::actualSpawiningTime -= OBSTACLE::actualSpawiningTime * 0.10f;
+			}
+
+			player.incrisingDificulty = false;
 		}
 	}
 

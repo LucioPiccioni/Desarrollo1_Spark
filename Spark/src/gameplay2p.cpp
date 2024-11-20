@@ -16,6 +16,8 @@
 
 namespace GAMEPLAY_2P
 {
+	const int pointsPerDifficultyIncrease = 3;
+
 	const int maxPlayers = 2;
 
 	PLAYER::Player player[maxPlayers];
@@ -43,6 +45,7 @@ namespace GAMEPLAY_2P
 		obstacles.clear();
 		OBSTACLE::actualSpacing = OBSTACLE::maxSpacing;
 		OBSTACLE::actualSpeed = OBSTACLE::minSpeed;
+		OBSTACLE::actualSpawiningTime = OBSTACLE::maxSpawiningTime;
 		OBSTACLE::spawnTimer = 0;
 	}
 
@@ -88,6 +91,35 @@ namespace GAMEPLAY_2P
 				PlaySound(SOUNDS::gameSounds.die);
 				gameState.actual = GAME_STATES::Gamestate::GAME_OVER;
 			}
+		}
+	}
+
+	void increaseDifficulty()
+	{
+		if (player[0].EXP == pointsPerDifficultyIncrease)
+		{
+			player[0].incrisingDificulty = true;
+			player[0].EXP = 0;
+		}
+
+		if (player[0].incrisingDificulty)
+		{
+			if (OBSTACLE::actualSpeed < OBSTACLE::maxSpeed)
+			{
+				OBSTACLE::actualSpeed += OBSTACLE::actualSpeed * 0.15f;
+			}
+
+			if (OBSTACLE::actualSpacing > OBSTACLE::minSpacing)
+			{
+				OBSTACLE::actualSpacing -= OBSTACLE::actualSpacing * 0.10f;
+			}
+
+			if (OBSTACLE::actualSpawiningTime > OBSTACLE::minSpawiningTime)
+			{
+				OBSTACLE::actualSpawiningTime -= OBSTACLE::actualSpawiningTime * 0.10f;
+			}
+
+			player[0].incrisingDificulty = false;
 		}
 	}
 

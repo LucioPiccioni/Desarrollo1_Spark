@@ -18,15 +18,20 @@ namespace PLAYER
 
 		player.color = WHITE;
 
+		player.currentFrame = 0;
+		player.framesCounter = 0;
+
 		player.jumpForce = -300;
 		player.gravityValue = 500;
 
 		player.points = 0;
+		player.EXP = 0;
 
 		player.speed = 0;
 
 		player.animate = false;
 		player.upwardsAngle = false;
+		player.incrisingDificulty = false;
 	}
 
 	void resetPlayer(Player& player)

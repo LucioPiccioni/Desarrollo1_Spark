@@ -10,6 +10,7 @@ namespace OBSTACLE
 
 	float actualSpacing = maxSpacing;
 
+	float actualSpawiningTime = maxSpawiningTime;
 	float spawnTimer = 0.0f;
 
 	Obstacle Creator()

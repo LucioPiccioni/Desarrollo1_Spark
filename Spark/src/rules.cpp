@@ -53,9 +53,7 @@ namespace RULES_MENU
 	{
 		SPRITES::drawBackgroundAssets();
 
-		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 125 });
-
-		DrawRectangle(0, 0, GetScreenWidth(), GetScreenHeight(), Color{ 0, 0, 0, 125 });
+		DrawRectangle(0, 0, SCREEN_WIDTH, SCREEN_HEIGHT, Color{ 0, 0, 0, 225 });
 
 		DrawTextPro(font, "Rules",
 			Vector2{ (GetScreenWidth() - MeasureTextEx(font, "Rules", 40, 0).x) * 0.5f, 50 },
@@ -75,6 +73,17 @@ namespace RULES_MENU
 		DrawTextPro(font, "Two-player: Player One jumps with W, Player Two with UP arrow.",
 			Vector2{ textX + 20, textY + 4 * spacing }, Vector2{ 0, 0 }, 0, 20, 0, WHITE);
 
+		DrawTextPro(font, "Difficulty Increase:", Vector2{ textX, textY + 5 * spacing }, Vector2{ 0, 0 }, 0, 30, 0, WHITE);
+		DrawTextPro(font, "Every Three obstacles passed, the difficulty increases:",
+			Vector2{ textX + 20, textY + 6 * spacing }, Vector2{ 0, 0 }, 0, 20, 0, WHITE);
+		DrawTextPro(font, "ONE. Obstacle speed increases by TEN Percent.",
+			Vector2{ textX + 20, textY + 7 * spacing }, Vector2{ 0, 0 }, 0, 20, 0, WHITE);
+		DrawTextPro(font, "TWO. Spacing between obstacles decreases by TEN Percent.",
+			Vector2{ textX + 20, textY + 8 * spacing }, Vector2{ 0, 0 }, 0, 20, 0, WHITE);
+		DrawTextPro(font, "THREE. Spawn rate of obstacles increases by TEN Percent.",
+			Vector2{ textX + 20, textY + 9 * spacing }, Vector2{ 0, 0 }, 0, 20, 0, WHITE);
+
 		BUTTON::drawButton(button, font);
 	}
+
 }

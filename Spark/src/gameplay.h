@@ -14,6 +14,8 @@ namespace GAMEPLAY_1P
 
 	void updateGame(GAME_STATES::ProgramState& gameState);
 
+	void increaseDifficulty();
+
 	void updatePlayer(float deltaTime);
 
 	void updateTexturesPos(float deltaTime);

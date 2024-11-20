@@ -14,6 +14,8 @@ namespace GAMEPLAY_2P
 
 	void updateGame(GAME_STATES::ProgramState& gameState);
 
+	void increaseDifficulty();
+
 	void updatePlayer(float deltaTime);
 
 	bool DidPlayerDied(Vector2 pos, float radius);

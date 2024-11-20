@@ -30,6 +30,10 @@ namespace OBSTACLE
 	extern float actualSpacing;
 	const float minSpacing = 70;
 
+	const float maxSpawiningTime = 6;
+	extern float actualSpawiningTime;
+	const float minSpawiningTime = 3;
+
 	Obstacle Creator();
 
 	void updateObstacle(Obstacle& obstacles, float deltaTime);

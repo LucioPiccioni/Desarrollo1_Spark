@@ -15,10 +15,11 @@ namespace PLAYER
 		int currentFrame = 0;
 		float framesCounter = 0.0f;
 
-		float jumpForce = 0.0f;
+		float jumpForce = 500.0f;
 		float gravityValue = -300;
 
 		int points = 0;
+		int EXP = 0;
 
 		float size = 0.0f;
 		float radius = 0.0f;
@@ -28,6 +29,7 @@ namespace PLAYER
 
 		bool animate = false;
 		bool upwardsAngle = false;
+		bool incrisingDificulty = false;
 	};
 
 	void initializePlayer(Player& player, Texture2D& playerSheet);
