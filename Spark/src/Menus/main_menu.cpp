@@ -23,9 +23,9 @@ namespace MAIN_MENU
 		Vector2 mouse = GetMousePosition();
 
 		if ((IsKeyPressed(KEY_DOWN) || IsKeyPressed(KEY_LEFT)) && SOUND_TRACKS::volume > 0)
-			SOUND_TRACKS::volume -= 0.1f;
+			SOUND_TRACKS::volume -= 0.01f;
 		else if ((IsKeyPressed(KEY_UP) || IsKeyPressed(KEY_RIGHT)) && SOUND_TRACKS::volume < 1)
-			SOUND_TRACKS::volume += 0.1f;
+			SOUND_TRACKS::volume += 0.01f;
 
 		for (int i = 0; i < maxButtons; i++)
 		{
